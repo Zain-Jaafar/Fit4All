@@ -1,0 +1,10 @@
+# Visual Studio Code cache/config directory
+.vscode/
+
+# Python Cache
+__pycache__
+
+# Python Virtual Environment
+env/
+venv/
+
