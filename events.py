@@ -1,7 +1,9 @@
 import pygame
 import pygame_gui
 import sys
-from ui_management import ui_manager
+
+from ui_management import ui_manager, age_input, injuries_input, disabilities_input, availability_input, other_information_input, onboarding_submit_button
+from user import User
 
 # Look throught the current events and do things accordingly
 def handle_events(events: list[pygame.event.Event]):
@@ -9,7 +11,15 @@ def handle_events(events: list[pygame.event.Event]):
         ui_manager.process_events(event) # Handle pygame_gui GUI Events
         
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            pass
+            if event.ui_element == onboarding_submit_button:
+                
+                age = age_input.get_text()
+                injuries = injuries_input.get_text()
+                disabilities = disabilities_input.get_text()
+                availability = availability_input.get_text()
+                other_information = other_information_input.get_text()
+                
+                user = User(age, injuries, disabilities, availability, other_information)
 
         if event.type == pygame.QUIT: # If the user pressed the close button on the window
             pygame.quit() # Uninitialise/quit pygame

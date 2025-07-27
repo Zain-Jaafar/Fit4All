@@ -4,11 +4,6 @@ from utils import SCREEN, FPS, clock
 from events import handle_events
 from ui_management import ui_manager
 
-class User:
-    def __init__(self, age, time_availability):
-        self.age = age
-        self.time_availability = time_availability
-
 
 def main():
     '''
