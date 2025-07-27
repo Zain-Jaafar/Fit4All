@@ -1,6 +1,9 @@
 # This file is used to initialise and define various constants and utility functions which will be used throughout the app
 
 import pygame
+import json
+
+from user import User
 
 # Initialise pygame
 pygame.init()
@@ -24,3 +27,24 @@ clock = pygame.time.Clock() # instantiate the pygame Clock, this is used to keep
 #     text_rect = pygame.Rect((0, 0), (text_surf.get_size()))
 #     text_rect.topleft = position
 #     SCREEN.blit(text_surf, text_rect)
+
+class SaveManager:
+    def __init__(self):
+        self.user = None
+        self.workout = {}
+        
+        self.user_file_name = "user.json"
+        self.workout_file_name = "workout.yaml"
+
+    def set_user(self, age, injuries, disabilities, availability, other_information):
+        self.user = User(age, injuries, disabilities, availability, other_information)
+
+    def save_user(self):
+        with open(self.user_file_name, "w") as file:
+            json.dump(self.user.data, file, indent=4)
+    
+    def load_user(self):
+        with open(self.user_file_name, "r") as file:
+            self.set_user(json.load(file))
+
+save_manager = SaveManager()

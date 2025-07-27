@@ -8,9 +8,11 @@ class User:
                  time_availability: int, 
                  other_information: str):
         
-        self.age = age
-        self.injuries = injuries
-        self.disabilities = disabilities
-        self.time_availability = time_availability
-        self.other_information = other_information
+        self.data = {
+            "age": age, 
+            "injuries": injuries, 
+            "disabilities": disabilities, 
+            "availability": time_availability, 
+            "other_information": other_information
+        }
     
