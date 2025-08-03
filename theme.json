@@ -1,0 +1,32 @@
+{
+    "defaults": 
+    {
+        "colours": 
+        {
+            "normal_text": "black"
+        }
+    },
+    "button":
+    {
+        "colours":
+        {
+            "normal_text": "white",
+            "hovered_text": "white",
+            "active_text": "white"
+        }
+    },
+
+    "text_entry_line":
+    {
+        "colours":
+        {
+            "normal_text": "#FFFFFF",
+            "selected_text": "#FFFFFF",
+            "text_cursor": "#FFFFFF"
+        },
+        "misc":
+        {
+            "padding": "20,0"
+        }
+    }
+}
