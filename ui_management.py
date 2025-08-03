@@ -7,7 +7,7 @@ ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
-pygame_gui.core.ColourGradient
+
 # Onboarding Page
 heading_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
                                             text="Welcome To Fit4All",
@@ -76,3 +76,33 @@ other_information_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(
 onboarding_submit_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
                                              text="Generate Workout Routine",
                                              manager=ui_manager)
+
+# List of elements in onboarding page
+onboarding_elements = [
+    heading_label, 
+    age_input, 
+    age_label, 
+    injuries_input, 
+    injuries_label, 
+    disabilities_input, 
+    disabilities_label, 
+    availability_input, 
+    availability_label, 
+    other_information_input, 
+    other_information_label,
+    onboarding_submit_button,
+]
+
+back_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
+                                             text="Back to Workout Generator",
+                                             manager=ui_manager)
+
+home_elements = [
+    back_button
+]
+
+# Hide all elements at first
+for element in onboarding_elements:
+    element.hide()
+
+back_button.hide()

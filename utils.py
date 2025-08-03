@@ -63,6 +63,7 @@ def generate_workout(data: dict):
     
     # Remove unwanted backticks from the LLM's output
     cleaned_response = response.text.replace("```json", "").replace("```", "").strip()
+    print(cleaned_response)
     
     # Convert string to a json-like object (list in this case) and save it
     app_manager.workout = json.loads(cleaned_response)
@@ -87,6 +88,11 @@ class AppManager:
         
         self.user_file_name = "user.json"
         self.workout_file_name = "workout.json"
+        
+        self.states = {
+            "Onboarding": False,
+            "Home": False,
+        }
 
     def set_user(self, age, injuries, disabilities, availability, other_information):
         self.user = User(age, injuries, disabilities, availability, other_information)
@@ -113,5 +119,26 @@ class AppManager:
         
         if workout_data:
             self.workout = workout_data
+    
+    def change_state(self, new_state: str, elements_to_show: list, elements_to_hide: list):
+        # Make sure the new_state parameter is valid,
+        # then update the states dictionary.
+        if new_state in self.states:
+            for state in self.states:
+                self.states[state] = False
+            self.states[new_state] = True
+
+            # Show all the neccessary elements
+            for element in elements_to_show:
+                element.show()
+            
+            # Hide all the neccessary elements
+            for element in elements_to_hide:
+                element.hide()
+
+        # If the state_to_change_to was invalid, then print "Invalid State"
+        else:
+            print("Invalid State")
+
 
 app_manager = AppManager()

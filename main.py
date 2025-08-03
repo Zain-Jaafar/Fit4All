@@ -2,7 +2,7 @@ import pygame
 
 from utils import SCREEN, FPS, clock, app_manager
 from events import handle_events
-from ui_management import ui_manager
+from ui_management import ui_manager, home_elements
 
 
 def main():
@@ -11,7 +11,13 @@ def main():
     other functions and methods.
     '''
     
+    app_manager.state = "onboarding"
+    
     app_manager.load_user()
+    app_manager.load_workout()
+    
+    if app_manager.user and app_manager.workout:
+        app_manager.change_state("Home", home_elements, [])
     
     while True:
         # This limits the framerate to the value of the FPS constant, keeping the application feeling smooth
