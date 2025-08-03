@@ -2,8 +2,6 @@
 
 import pygame
 import json
-from google import genai
-import threading
 
 import os
 from dotenv import load_dotenv
@@ -28,46 +26,10 @@ pygame.display.set_caption("Fit4All") # Sets the title of the window
 FPS = 60 # This variable defines the desired framerate/refresh rate for the rindow
 clock = pygame.time.Clock() # Instantiate the pygame Clock, this is used to keep track of the framerate
 
-# Store the API key in a .env file for security purposes, DONT PUSH THE .ENV FILE TO GITHUB
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def extract_json(text: str) -> str:
     cleaned_data = text.replace("```json", "").replace("```", "").strip()
     return cleaned_data
-
-def generate_workout(data: dict):
-    prompt = f'''
-        Generate an at-home workout for this user who has provided this information about themselves:
-        age: {data["age"]}
-        injuries: {data["injuries"]}
-        physical disabilities: {data["disabilities"]}
-        time available per day in minutes: {data["availability"]}
-        other information: {data["other_information"]}
-    ''' + '''
-        only output json.
-        ensure the workout can be reasonably finished within the time available per day.
-        Generate the workout as a list of exercises in json with the format:
-            [
-                {
-                    "name": "string, name of the exercise",
-                    "description": "string, description of the exercise with brief instructions",
-                    "reps": "int, number of reps",
-                    "sets": "int, number of sets"
-                }
-            ]
-    '''
-    
-    response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=prompt
-    )
-    
-    # Remove unwanted backticks from the LLM's output
-    cleaned_response = response.text.replace("```json", "").replace("```", "").strip()
-    print(cleaned_response)
-    
-    # Convert string to a json-like object (list in this case) and save it
-    app_manager.workout = json.loads(cleaned_response)
-    app_manager.save_workout()
 
 class SaveManager:
     def save(self, filename, data):
@@ -131,6 +93,7 @@ class AppManager:
             # Show all the neccessary elements
             for element in elements_to_show:
                 element.show()
+                element.enable()
             
             # Hide all the neccessary elements
             for element in elements_to_hide:

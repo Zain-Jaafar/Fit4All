@@ -3,7 +3,7 @@ import pygame_gui
 import sys
 import threading
 
-from ui_management import (
+from ui_elements import (
     ui_manager, 
     onboarding_elements,
     home_elements,
@@ -15,7 +15,9 @@ from ui_management import (
     onboarding_submit_button, 
     back_button
 )
-from utils import app_manager, generate_workout
+
+from utils import app_manager
+from ai_model import generate_workout
 
 
 # Look through the current events and do things accordingly
