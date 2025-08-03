@@ -3,8 +3,8 @@ import pygame_gui
 import sys
 
 from ui_management import ui_manager, age_input, injuries_input, disabilities_input, availability_input, other_information_input, onboarding_submit_button
-from user import User
-from utils import save_manager
+from utils import app_manager, generate_workout
+
 
 # Look through the current events and do things accordingly
 def handle_events(events: list[pygame.event.Event]):
@@ -21,8 +21,10 @@ def handle_events(events: list[pygame.event.Event]):
                 availability = availability_input.get_text()
                 other_information = other_information_input.get_text()
                 
-                save_manager.set_user(age, injuries, disabilities, availability, other_information)
-                save_manager.save_user()
+                app_manager.set_user(age, injuries, disabilities, availability, other_information)
+                app_manager.save_user()
+                
+                generate_workout(app_manager.user.data)
                 
 
         if event.type == pygame.QUIT: # If the user pressed the close button on the window

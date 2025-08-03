@@ -1,6 +1,6 @@
 import pygame
 
-from utils import SCREEN, FPS, clock
+from utils import SCREEN, FPS, clock, app_manager
 from events import handle_events
 from ui_management import ui_manager
 
@@ -10,6 +10,8 @@ def main():
     This function handles the main loop of the application, calling
     other functions and methods.
     '''
+    
+    app_manager.load_user()
     
     while True:
         # This limits the framerate to the value of the FPS constant, keeping the application feeling smooth

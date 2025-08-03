@@ -1,13 +1,13 @@
-import pygame_gui.elements
+import pygame_gui
 import pygame
 
 from utils import SCREEN_WIDTH, SCREEN_HEIGHT
 
-ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT))
+ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
-
+pygame_gui.core.ColourGradient
 # Onboarding Page
 heading_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
                                             text="Welcome To Fit4All",
