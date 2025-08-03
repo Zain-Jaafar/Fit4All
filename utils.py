@@ -3,7 +3,7 @@
 import pygame
 import json
 from google import genai
-import re
+import threading
 
 import os
 from dotenv import load_dotenv
@@ -64,10 +64,9 @@ def generate_workout(data: dict):
     # Remove unwanted backticks from the LLM's output
     cleaned_response = response.text.replace("```json", "").replace("```", "").strip()
     
-    # Convert string to a json-like object and save it
+    # Convert string to a json-like object (list in this case) and save it
     app_manager.workout = json.loads(cleaned_response)
     app_manager.save_workout()
-    
 
 class SaveManager:
     def save(self, filename, data):

@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import sys
+import threading
 
 from ui_management import ui_manager, age_input, injuries_input, disabilities_input, availability_input, other_information_input, onboarding_submit_button
 from utils import app_manager, generate_workout
@@ -24,7 +25,9 @@ def handle_events(events: list[pygame.event.Event]):
                 app_manager.set_user(age, injuries, disabilities, availability, other_information)
                 app_manager.save_user()
                 
-                generate_workout(app_manager.user.data)
+                
+                workout_generation_thread = threading.Thread(target=generate_workout, args=(app_manager.user.data,))
+                workout_generation_thread.start()
                 
 
         if event.type == pygame.QUIT: # If the user pressed the close button on the window
