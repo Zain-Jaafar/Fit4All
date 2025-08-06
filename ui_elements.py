@@ -8,6 +8,10 @@ ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
 
+error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*20, base_column_width*10, 20),
+                                                         text="",
+                                                         manager=ui_manager)
+
 # Onboarding Page
 heading_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
                                             text="Welcome To Fit4All",
@@ -91,6 +95,7 @@ onboarding_elements = [
     other_information_input, 
     other_information_label,
     onboarding_submit_button,
+    error_notification_label,
 ]
 
 back_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
@@ -98,11 +103,10 @@ back_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(base_column
                                              manager=ui_manager)
 
 home_elements = [
-    back_button
+    back_button,
+    error_notification_label,
 ]
 
 # Hide all elements at first
-for element in onboarding_elements:
+for element in [*onboarding_elements, *home_elements]:
     element.hide()
-
-back_button.hide()
