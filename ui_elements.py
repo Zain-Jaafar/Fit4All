@@ -1,7 +1,7 @@
 import pygame_gui
 import pygame
 
-from utils import SCREEN_WIDTH, SCREEN_HEIGHT
+from utils import SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
 
 ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 
@@ -102,10 +102,61 @@ back_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect(base_column
                                              text="Back to Workout Generator",
                                              manager=ui_manager)
 
+exercise_scroll_container = pygame_gui.elements.UIScrollingContainer(relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*20),
+                                                                     should_grow_automatically=True,
+                                                                     allow_scroll_x=False,
+                                                                     manager=ui_manager)
+
 home_elements = [
     back_button,
-    error_notification_label,
+    exercise_scroll_container,
 ]
+
+exercise_labels = []
+
+def load_exercise_elements():
+    # Remove old elements
+    global exercise_labels
+    for label in exercise_labels:
+        label.kill()
+        if label in home_elements:
+            home_elements.remove(label)
+    exercise_labels = []
+
+    # Add new labels
+    for index, element in enumerate(app_manager.workout):
+        ui_pos_multiplier = 22*5
+        
+        name_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, 20),
+            text=element["name"],
+            container=exercise_scroll_container,
+            manager=ui_manager,
+        )
+        description_textbox = pygame_gui.elements.UITextBox(
+            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 20, base_column_width*10, base_row_height*2.2),
+            html_text=element["description"],
+            container=exercise_scroll_container,
+            manager=ui_manager,
+        )
+        sets_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + base_row_height*2.2 + 20, base_column_width*5, 20),
+            text=f"Sets: {element['sets']}",
+            container=exercise_scroll_container,
+            manager=ui_manager,
+        )
+        reps_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(base_column_width*5, index*ui_pos_multiplier + base_row_height*2.2 + 20, base_column_width*5, 20),
+            text=f"Reps: {element['reps']}",
+            container=exercise_scroll_container,
+            manager=ui_manager,
+        )
+        
+        home_elements.extend([name_label, description_textbox, sets_label, reps_label])
+        exercise_labels.extend([name_label, description_textbox, sets_label, reps_label])
+    
+    # print(f"exercise_labels: {exercise_labels}, \n home_elements: {home_elements}")
+    
 
 # Hide all elements at first
 for element in [*onboarding_elements, *home_elements]:

@@ -28,5 +28,17 @@
         {
             "padding": "20,0"
         }
+    },
+    "text_box":
+    {
+        "colours":
+        {
+            "dark_bg": "#FFFFFF",
+            "normal_border": "#FFFFFF"
+        },
+        "misc":
+        {
+            "line_spacing": 1
+        }
     }
 }

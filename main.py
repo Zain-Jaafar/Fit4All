@@ -2,7 +2,7 @@ import pygame
 
 from utils import SCREEN, FPS, clock, app_manager
 from events import handle_events
-from ui_elements import ui_manager, onboarding_elements, home_elements
+from ui_elements import ui_manager, onboarding_elements, home_elements, load_exercise_elements
 
 
 def main():
@@ -10,6 +10,8 @@ def main():
     This function handles the main loop of the application, calling
     other functions and methods.
     '''
+    
+    app_manager.workout_changed_callback = load_exercise_elements
     
     app_manager.change_state("Onboarding", onboarding_elements, [])
     

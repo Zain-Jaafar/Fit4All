@@ -44,7 +44,7 @@ class SaveManager:
 class AppManager:
     def __init__(self):
         self.user = None
-        self.workout = []
+        self._workout = []
         
         self.save_manager = SaveManager()
         
@@ -55,6 +55,16 @@ class AppManager:
             "Onboarding": False,
             "Home": False,
         }
+    
+    @property
+    def workout(self):
+        return self._workout
+    
+    @workout.setter
+    def workout(self, value):
+        self._workout = value
+        if self.workout_changed_callback:
+            self.workout_changed_callback()
 
     def set_user(self, age, injuries, disabilities, availability, other_information):
         self.user = User(age, injuries, disabilities, availability, other_information)
