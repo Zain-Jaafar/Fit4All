@@ -33,6 +33,7 @@ def handle_events(events: list[pygame.event.Event]):
                         # Get age and ensure it is withing the bounds
                         age_text = age_input.get_text()
                         
+                        # Ensure that age is a number and within the boundaries 
                         try:
                             age = int(age_text)
                         except ValueError:
@@ -48,6 +49,7 @@ def handle_events(events: list[pygame.event.Event]):
                         # Get time availability in minutes and ensure it is within the bounds
                         availability_text = availability_input.get_text()
                         
+                        # Ensure that time availability in minutes is a number and within the boundaries
                         try:
                             availability = int(availability_text)
                         except:
@@ -72,6 +74,7 @@ def handle_events(events: list[pygame.event.Event]):
                         for element in onboarding_elements:
                             element.disable()
                     
+                    # If an error occures
                     except ValueError as error:
                         print("Please eneter a valid input: ", error)
                         
