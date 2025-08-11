@@ -127,33 +127,45 @@ def load_exercise_elements():
     for index, element in enumerate(app_manager.workout):
         ui_pos_multiplier = 22*5
         
+        # Format description text with newlines every 50 characters
+        desc_text = element["description"]
+        wrapped_desc = ""
+        while len(desc_text) > 40:
+            # Find the last space before 50 characters
+            split_index = desc_text[:40].rfind(' ')
+            if split_index == -1:  # No space found, force split at 50
+                split_index = 30
+            wrapped_desc += desc_text[:split_index] + '\n'
+            desc_text = desc_text[split_index:].lstrip()
+        wrapped_desc += desc_text  # Add remaining text
+        
         name_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, 20),
             text=element["name"],
             container=exercise_scroll_container,
             manager=ui_manager,
         )
-        description_textbox = pygame_gui.elements.UITextBox(
-            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 20, base_column_width*10, base_row_height*2.2),
-            html_text=element["description"],
+        description_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, base_row_height*2.2),
+            text=wrapped_desc,
             container=exercise_scroll_container,
             manager=ui_manager,
         )
         sets_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + base_row_height*2.2 + 20, base_column_width*5, 20),
+            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + base_row_height*2.2, base_column_width*5, 20),
             text=f"Sets: {element['sets']}",
             container=exercise_scroll_container,
             manager=ui_manager,
         )
         reps_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(base_column_width*5, index*ui_pos_multiplier + base_row_height*2.2 + 20, base_column_width*5, 20),
+            relative_rect=pygame.Rect(base_column_width*5, index*ui_pos_multiplier + base_row_height*2.2, base_column_width*5, 20),
             text=f"Reps: {element['reps']}",
             container=exercise_scroll_container,
             manager=ui_manager,
         )
         
-        home_elements.extend([name_label, description_textbox, sets_label, reps_label])
-        exercise_labels.extend([name_label, description_textbox, sets_label, reps_label])
+        home_elements.extend([name_label, description_label, sets_label, reps_label])
+        exercise_labels.extend([name_label, description_label, sets_label, reps_label])
     
     # print(f"exercise_labels: {exercise_labels}, \n home_elements: {home_elements}")
     
