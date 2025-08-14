@@ -8,7 +8,7 @@ ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
 
-error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*20, base_column_width*10, 20),
+error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 100),
                                                          text="",
                                                          manager=ui_manager)
 

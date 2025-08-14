@@ -31,16 +31,16 @@ def handle_events(events: list[pygame.event.Event]):
                 if event.ui_element == onboarding_submit_button: # If the user pressed the submit button
                     try:
                         # Get age and ensure it is withing the bounds
-                        age_text = age_input.get_text()
+                        age_text = age_input.get_text().strip()
                         
                         # Ensure that age is a number and within the boundaries 
                         try:
                             age = int(age_text)
                         except ValueError:
-                            raise ValueError("Age: Please enter a positive integer under 150.")
+                            raise ValueError("Age:\nPlease enter a positive integer under 150.")
                         
                         if not(0 < age < 150):
-                            raise ValueError("Age: Please enter a positive integer under 150.")
+                            raise ValueError("Age:\nPlease enter a positive integer under 150.")
                         
                         # Get injuries and disabilities information
                         injuries = injuries_input.get_text()
@@ -53,10 +53,10 @@ def handle_events(events: list[pygame.event.Event]):
                         try:
                             availability = int(availability_text)
                         except:
-                            raise ValueError("Please enter a positive integer under 300.")
+                            raise ValueError("Time Availability:\nPlease enter a positive integer under 300.")
                         
                         if not(0 < availability < 300):
-                            raise ValueError("Please enter a positive integer under 300.")
+                            raise ValueError("Time Availability:\nPlease enter a positive integer under 300.")
                         
                         # Get info from the "other information" input box
                         other_information = other_information_input.get_text()

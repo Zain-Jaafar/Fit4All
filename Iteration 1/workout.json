@@ -1,0 +1,80 @@
+[
+    {
+        "name": "Warm-up: Marching in Place",
+        "description": "Begin by gently marching in place, lifting your knees to hip height. Focus on getting your blood flowing throughout your lower body. Perform for 2-3 minutes.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Leg Swings (Forward/Backward)",
+        "description": "Stand tall, holding onto a stable support with your uninjured arm if needed for balance. Swing one leg forward and backward in a controlled motion, focusing on hip mobility. Switch legs. Perform 10-12 swings per leg.",
+        "reps": 10,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Torso Twists (Seated or Standing)",
+        "description": "Either seated or standing with feet shoulder-width apart, gently twist your torso from side to side. Keep your movements controlled and fluid, avoiding any quick or jerky motions. Do not involve your arms in the twisting motion, let them hang or rest gently. Perform 10-12 twists per side.",
+        "reps": 10,
+        "sets": 1
+    },
+    {
+        "name": "Bodyweight Squats",
+        "description": "Stand with feet shoulder-width apart, toes pointing slightly out. Lower your hips as if sitting into a chair, keeping your chest up and back straight. Go as deep as comfortable without pain. Your hands can be clasped at your chest or extended forward for balance. Ensure no strain or weight-bearing on your broken arm.",
+        "reps": 12,
+        "sets": 3
+    },
+    {
+        "name": "Reverse Lunges",
+        "description": "Start standing tall. Step one leg straight back, lowering your back knee towards the ground until both knees are bent at about a 90-degree angle. Push off your back foot to return to the starting position. Alternate legs. Keep your upper body upright. Use your hands for balance if needed, without putting pressure on the injured arm.",
+        "reps": 10,
+        "sets": 3
+    },
+    {
+        "name": "Glute Bridges",
+        "description": "Lie on your back with knees bent and feet flat on the floor, hip-width apart. Your injured arm can rest gently by your side or across your stomach. Engage your glutes and lift your hips off the floor until your body forms a straight line from shoulders to knees. Hold briefly at the top, then slowly lower back down.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Calf Raises",
+        "description": "Stand tall, either free-standing or holding onto a stable object (like a wall or chair) with your uninjured hand for balance. Slowly raise yourself up onto the balls of your feet, lifting your heels as high as possible. Hold briefly at the top, feeling the squeeze in your calves, then slowly lower back down.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Forearm Plank",
+        "description": "Lie on your stomach. Prop yourself up on your forearms and toes, keeping your body in a straight line from head to heels. Engage your core, glutes, and quadriceps. Ensure your elbows are directly under your shoulders. Crucially, do NOT put weight on your hands or wrist. Hold this position for 30-60 seconds.",
+        "reps": 1,
+        "sets": 3
+    },
+    {
+        "name": "Crunches",
+        "description": "Lie on your back with knees bent and feet flat on the floor. Place your hands gently behind your head (without pulling on your neck) or crossed over your chest. Exhale as you lift your head and shoulders off the floor, engaging your abdominal muscles. Keep your lower back pressed to the floor. Inhale as you slowly lower back down.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Supermans",
+        "description": "Lie face down on the floor with your arms extended forward (if safe and comfortable, otherwise keep them by your sides or bent with elbows out). Gently lift your chest, arms (if extended and safe), and legs off the floor simultaneously, squeezing your glutes and lower back muscles. Hold briefly, then slowly lower. Avoid any strain on the injured arm and only lift it if comfortable and pain-free.",
+        "reps": 12,
+        "sets": 3
+    },
+    {
+        "name": "Cool-down: Hamstring Stretch",
+        "description": "Sit on the floor with one leg extended straight out and the other bent with the sole of your foot against your inner thigh. Keeping your back straight, gently lean forward from your hips towards your extended foot until you feel a stretch in your hamstring. Hold for 20-30 seconds per leg. Do not use your hands to pull on your leg if it strains your injured arm.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Quad Stretch (Standing)",
+        "description": "Stand tall and hold onto a wall or chair with your uninjured hand for balance. Bend one knee and, if safe and pain-free for your uninjured arm, gently grab your ankle with that hand. Pull your heel towards your glute, feeling the stretch in the front of your thigh. Keep your knees close together. Hold for 20-30 seconds per leg. If grabbing your ankle is not possible or safe, gently lean into a wall with one foot behind you to feel a stretch.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Glute Stretch (Figure-Four)",
+        "description": "Lie on your back with knees bent and feet flat. Cross one ankle over the opposite knee, forming a 'figure-four' shape. Gently pull the bottom knee towards your chest (you can use your uninjured leg or a towel if needed to assist, ensuring no strain on the broken arm) until you feel a stretch in your glute. Hold for 20-30 seconds per side.",
+        "reps": 1,
+        "sets": 1
+    }
+]

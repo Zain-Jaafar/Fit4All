@@ -22,14 +22,14 @@ SCREEN_HEIGHT = 700
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Creates a window
 pygame.display.set_caption("Fit4All") # Sets the title of the window
 
+# Change the working directory of the program to the folder that this
+# 
+file_path = os.path.abspath(__file__)
+os.chdir(os.path.dirname(file_path))
+
 
 FPS = 60 # This variable defines the desired framerate/refresh rate for the rindow
 clock = pygame.time.Clock() # Instantiate the pygame Clock, this is used to keep track of the framerate
-
-
-def extract_json(text: str) -> str:
-    cleaned_data = text.replace("```json", "").replace("```", "").strip()
-    return cleaned_data
 
 class SaveManager:
     def save(self, filename, data):
