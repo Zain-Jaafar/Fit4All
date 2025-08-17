@@ -14,6 +14,7 @@ from ui_elements import (
     other_information_input, 
     onboarding_submit_button, 
     back_button,
+    error_notification_heading_label,
     error_notification_label,
 )
 
@@ -37,10 +38,10 @@ def handle_events(events: list[pygame.event.Event]):
                         try:
                             age = int(age_text)
                         except ValueError:
-                            raise ValueError("Age:\nPlease enter a positive integer under 150.")
+                            raise ValueError("Age:", "Please enter a positive integer under 150.")
                         
                         if not(0 < age < 150):
-                            raise ValueError("Age:\nPlease enter a positive integer under 150.")
+                            raise ValueError("Age:", "Please enter a positive integer under 150.")
                         
                         # Get injuries and disabilities information
                         injuries = injuries_input.get_text()
@@ -53,10 +54,10 @@ def handle_events(events: list[pygame.event.Event]):
                         try:
                             availability = int(availability_text)
                         except:
-                            raise ValueError("Time Availability:\nPlease enter a positive integer under 300.")
+                            raise ValueError("Time Availability:", "Please enter a positive integer under 300.")
                         
                         if not(0 < availability < 300):
-                            raise ValueError("Time Availability:\nPlease enter a positive integer under 300.")
+                            raise ValueError("Time Availability:", "Please enter a positive integer under 300.")
                         
                         # Get info from the "other information" input box
                         other_information = other_information_input.get_text()
@@ -76,11 +77,15 @@ def handle_events(events: list[pygame.event.Event]):
                     
                     # If an error occures
                     except ValueError as error:
-                        print("Please eneter a valid input: ", error)
+                        error_heading = error.args[0]
+                        error_message = error.args[1]
+                        
+                        print("Please eneter a valid input: ", error_heading, error_message)
                         
                         # If there an error was raised, 
-                        # set the text of the notification label to be the error message, 
-                        error_notification_label.set_text(f"{error}")
+                        # set the text of the notification labels to be the error message,
+                        error_notification_heading_label.set_text(f"{error_heading}")
+                        error_notification_label.set_text(f"{error_message}")
                         
                         # Show the notification label if it is not already shown
                         if not error_notification_label.visible:

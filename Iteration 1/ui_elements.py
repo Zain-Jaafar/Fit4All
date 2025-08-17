@@ -8,7 +8,11 @@ ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
 
-error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 100),
+error_notification_heading_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 40),
+                                                         text="",
+                                                         manager=ui_manager)
+
+error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*19, base_column_width*10, 40),
                                                          text="",
                                                          manager=ui_manager)
 
@@ -138,6 +142,8 @@ def load_exercise_elements():
             wrapped_desc += desc_text[:split_index] + '\n'
             desc_text = desc_text[split_index:].lstrip()
         wrapped_desc += desc_text  # Add remaining text
+        
+        print(repr(wrapped_desc))
         
         name_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, 20),
