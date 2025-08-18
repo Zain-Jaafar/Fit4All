@@ -131,20 +131,19 @@ def load_exercise_elements():
     for index, element in enumerate(app_manager.workout):
         ui_pos_multiplier = 22*5
         
-        # Format description text with newlines every 50 characters
+        # Format description text with newlines every 40 characters
         desc_text = element["description"]
         wrapped_desc = ""
         while len(desc_text) > 40:
-            # Find the last space before 50 characters
+            # Find the last space before 40 characters
             split_index = desc_text[:40].rfind(' ')
-            if split_index == -1:  # No space found, force split at 50
+            if split_index == -1:  # No space found, force split at 40
                 split_index = 30
             wrapped_desc += desc_text[:split_index] + '\n'
             desc_text = desc_text[split_index:].lstrip()
         wrapped_desc += desc_text  # Add remaining text
         
-        print(repr(wrapped_desc))
-        
+        # Create labels for displaying the workout exercise information
         name_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, 20),
             text=element["name"],
@@ -170,6 +169,7 @@ def load_exercise_elements():
             manager=ui_manager,
         )
         
+        # Add the new elements for each exercise to the home_elements and exercise_elements list to manage them in the future.
         home_elements.extend([name_label, description_label, sets_label, reps_label])
         exercise_labels.extend([name_label, description_label, sets_label, reps_label])
     

@@ -23,7 +23,6 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # Creates a wind
 pygame.display.set_caption("Fit4All") # Sets the title of the window
 
 # Change the working directory of the program to the folder that this
-# 
 file_path = os.path.abspath(__file__)
 os.chdir(os.path.dirname(file_path))
 
@@ -31,47 +30,59 @@ os.chdir(os.path.dirname(file_path))
 FPS = 60 # This variable defines the desired framerate/refresh rate for the rindow
 clock = pygame.time.Clock() # Instantiate the pygame Clock, this is used to keep track of the framerate
 
+# SaveManager class
 class SaveManager:
+    # Save method
     def save(self, filename, data):
         with open(filename, "w") as file:
-            json.dump(data, file, indent=4)
+            json.dump(data, file, indent=4) # indent=4 formats the data nicely
 
+    # Load method
     def load(self, filename):
         if os.path.exists(filename): # Check if file exists
             with open(filename, "r") as file:
                 return json.load(file) # Return the data
 
 class AppManager:
-    def __init__(self):
+    def __init__(self): # Initialise class attributes.
         self.user = None
         self._workout = []
         
         self.save_manager = SaveManager()
         
+        # File names to save to
         self.user_file_name = "user.json"
         self.workout_file_name = "workout.json"
         
+        # Application states, used to know what UI elements to show and when. 
         self.states = {
             "Onboarding": False,
             "Home": False,
         }
     
+    # define property "workout"
     @property
     def workout(self):
         return self._workout
     
+    # define setter function for workout, 
+    # this runs a callback function whenever self.workout is changed, 
+    # i use it to reload the gui elements which show the workout whenever the workout is changed
     @workout.setter
     def workout(self, value):
         self._workout = value
         if self.workout_changed_callback:
             self.workout_changed_callback()
 
+    # set_user method
     def set_user(self, age, injuries, disabilities, availability, other_information):
         self.user = User(age, injuries, disabilities, availability, other_information)
 
+    # Method for saving the user
     def save_user(self):
         self.save_manager.save(self.user_file_name, self.user.data)
     
+    # Method for loading the user
     def load_user(self):
         # Get the data from the user.json, which is a dictionary, and convert the values to a list
         user_data = self.save_manager.load(self.user_file_name)
@@ -82,7 +93,8 @@ class AppManager:
             # The * is the unpack operator, 
             # it allows me to pass all the elements in the list as arguments for the user object 
             self.user = User(*cleaned_user_data)
-            
+    
+    # Methods for saving and loading the workout routine    
     def save_workout(self):
         self.save_manager.save(self.workout_file_name, self.workout)
     
@@ -92,6 +104,7 @@ class AppManager:
         if workout_data:
             self.workout = workout_data
     
+    # Method for changing the state of the application.
     def change_state(self, new_state: str, elements_to_show: list, elements_to_hide: list):
         # Make sure the new_state parameter is valid,
         # then update the states dictionary.
@@ -109,7 +122,7 @@ class AppManager:
             for element in elements_to_hide:
                 element.hide()
 
-        # If the state_to_change_to was invalid, then print "Invalid State"
+        # If the state_to_change_to was invalid, then print "Invalid State", useful for debugging
         else:
             print("Invalid State")
 

@@ -11,10 +11,13 @@ def main():
     other functions and methods.
     '''
     
+    # Set the callback function which runs whenever app_manager.workout is changed
     app_manager.workout_changed_callback = load_exercise_elements
     
+    # Change to onboarding page
     app_manager.change_state("Onboarding", onboarding_elements, [])
     
+    # Attempt to load the user and workout routine
     app_manager.load_user()
     app_manager.load_workout()
     
@@ -28,6 +31,7 @@ def main():
         
         handle_events(pygame.event.get()) # Call event loop
         
+        # Update UI elements
         ui_manager.update(delta_time)
         
         
