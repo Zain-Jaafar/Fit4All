@@ -1,14 +1,25 @@
 import json
-import os
+from sys import exit
+from time import sleep
 from google import genai
+from pygame import quit
 
 from utils import app_manager
 from ui_elements import onboarding_elements, home_elements
 
-# Store the API key in a .env file for security purposes, DONT PUSH THE .ENV FILE TO GITHUB
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+# Try to get setup the AI client, if an exception occurs, tell the user how to set up the ai
+try:
+    # Store the API key in a .env file for security purposes, DONT PUSH THE .ENV FILE TO GITHUB
+    client = genai.Client()
+except:
+    print("\n!!! Please check the README.md file for instructions to get the AI model working !!!\n")
+    print("\n!!! Please check the README.md file for instructions to get the AI model working !!!\n")
+    quit() # Quit pygame, closes the window
+    sleep(15) # Wait 15 seconds so that the user has plenty of time to read the console output
+    exit() # Close the python program
 
-def generate_workout(data: dict):
+def generate_workout(data: dict): 
+    # Create custom prompt based on user data
     prompt = f'''
         Generate an at-home workout for this user who has provided this information about themselves:
         age: {data["age"]}
@@ -30,6 +41,7 @@ def generate_workout(data: dict):
             ]
     '''
     
+    # send prompt to the AI LLM and wait for a response
     response = client.models.generate_content(
         model="gemini-2.5-flash", contents=prompt
     )
@@ -42,4 +54,5 @@ def generate_workout(data: dict):
     app_manager.workout = json.loads(cleaned_response)
     app_manager.save_workout()
     
+    # Change to home state
     app_manager.change_state("Home", home_elements, onboarding_elements)
