@@ -1,0 +1,80 @@
+[
+    {
+        "name": "Warm-up: Gentle Arm Circles",
+        "description": "Stand tall or sit comfortably. Gently rotate arms forward in small circles for 30 seconds, then reverse and rotate backward for another 30 seconds. Focus on smooth, controlled movements. Modifications: Can be done seated, or just moving hands and wrists if full arm movement is difficult.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Marching in Place",
+        "description": "Stand tall and march in place, lifting knees gently towards the hips. Continue for 1 minute. Modifications: If standing is difficult, do seated leg lifts, lifting one knee at a time. If balance is an issue, hold onto a chair or wall for support.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Torso Twists",
+        "description": "Stand or sit with feet flat on the floor. Gently twist your upper body from side to side, looking over your shoulder. Keep hips relatively still. Do 10 twists to each side. Modifications: Can be done seated. Only twist as far as comfortable.",
+        "reps": 10,
+        "sets": 1
+    },
+    {
+        "name": "Chair Squats",
+        "description": "Stand in front of a sturdy chair. Slowly lower your body as if to sit, then stand back up. Keep your back straight and chest up. If sitting fully is too much, just lower halfway. Modifications: Use armrests to assist pushing up if needed, or simply practice rocking back and forth in the chair to engage leg muscles.",
+        "reps": 8,
+        "sets": 3
+    },
+    {
+        "name": "Wall Push-ups",
+        "description": "Stand an arm's length from a wall, hands flat on the wall at shoulder height. Bend elbows to lean towards the wall, then push back until arms are straight. Modifications: Adjust distance from the wall (closer is easier). If standing is not possible, do tabletop push-ups on hands and knees, or push hands together in front of chest.",
+        "reps": 8,
+        "sets": 2
+    },
+    {
+        "name": "Arm Raises (Front & Side)",
+        "description": "Stand or sit with good posture. For front raises, lift arms straight forward to shoulder height, then lower slowly. For side raises, lift arms out to the sides to shoulder height, then lower. Perform all front raises, then all side raises. Modifications: Use no weights, or very light household items like water bottles. Can be done entirely seated. Only lift arms as high as comfortable.",
+        "reps": 10,
+        "sets": 2
+    },
+    {
+        "name": "Calf Raises",
+        "description": "Stand tall, holding onto a chair or wall for support if needed. Slowly lift up onto the balls of your feet, then lower heels back down. Modifications: If standing is difficult, do seated calf raises by tapping your toes up and down while keeping heels on the ground. Can also do one leg at a time with support.",
+        "reps": 12,
+        "sets": 2
+    },
+    {
+        "name": "Superman",
+        "description": "Lie on your stomach with arms extended forward. Gently lift your arms and chest (and legs if comfortable) off the floor, then lower. Imagine flying like Superman! Modifications: Only lift arms, or only lift legs. If lying on the stomach is not possible, this can be adapted to sitting in a chair and extending arms forward while gently arching the back.",
+        "reps": 8,
+        "sets": 2
+    },
+    {
+        "name": "Bridge",
+        "description": "Lie on your back with knees bent and feet flat on the floor, hip-width apart. Gently lift your hips off the floor, squeezing your glutes, then slowly lower. Modifications: Lift hips only a small amount if a full bridge is difficult. Focus on just squeezing the glute muscles. If lying down is not an option, practice tensing and relaxing the glute muscles while seated.",
+        "reps": 10,
+        "sets": 2
+    },
+    {
+        "name": "Fun Movement: Dance Party!",
+        "description": "Put on your favorite upbeat music and just move! Dance, shake, wiggle, or do whatever feels good and fun. This is about enjoying movement. Modifications: Can be done seated, or moving arms and upper body only. Focus on joyful expression.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Arm Stretches",
+        "description": "Gently pull one arm across your chest, holding for 20-30 seconds. Then, bend one arm behind your head and gently push on the elbow with the other hand for a tricep stretch. Hold each stretch for 20-30 seconds, then switch arms. Modifications: Can be done seated. Only stretch as far as comfortable.",
+        "reps": 1,
+        "sets": 2
+    },
+    {
+        "name": "Cool-down: Leg Stretches",
+        "description": "For hamstring stretch: Sit on the floor (or edge of a chair) with one leg extended, and gently reach towards your toes. For quadricep stretch: Stand and hold onto something for balance, gently pull one heel towards your glute (or lie on your side and pull heel). Hold each stretch for 20-30 seconds per leg. Modifications: All stretches can be done seated. Only stretch as far as comfortable, never to pain.",
+        "reps": 1,
+        "sets": 2
+    },
+    {
+        "name": "Cool-down: Deep Breathing",
+        "description": "Lie down or sit comfortably. Place one hand on your belly. Take slow, deep breaths, feeling your belly rise as you inhale and fall as you exhale. Focus on relaxing your body and mind. Continue for 2-3 minutes.",
+        "reps": 1,
+        "sets": 1
+    }
+]
