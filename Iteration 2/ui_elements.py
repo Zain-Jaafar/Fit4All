@@ -1,7 +1,14 @@
 import pygame_gui
 import pygame
+import warnings
 
 from utils import SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
+
+# Filter out warnings saying that the "Label Rect is too small for text" using REGEX.
+# Other warnings are still allowed.
+# If I do not do this, there will be lots of warnings saying that the text for the exercises dont fit in their labels. 
+# This is intended, so the warnings are useless and would just clutter the console output.
+warnings.filterwarnings("ignore", message=".*Label Rect is too small for text.*")
 
 ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 
@@ -38,7 +45,7 @@ injuries_input = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(b
                                             manager=ui_manager)
 
 injuries_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(0, -20, -1, 20),
-                                        text="Do you have any injuries?",
+                                        text="Got any injuries? If so, what kind?",
                                         anchors={'bottom': 'bottom',
                                                  'right': 'right',
                                                  'bottom_target': injuries_input,
@@ -50,7 +57,7 @@ disabilities_input = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Re
                                             manager=ui_manager)
 
 disabilities_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(0, -20, -1, 20),
-                                        text="Do you have any disabilities?",
+                                        text="Got any disabilities? If so, what kind?",
                                         anchors={'bottom': 'bottom',
                                                  'right': 'right',
                                                  'bottom_target': disabilities_input,
