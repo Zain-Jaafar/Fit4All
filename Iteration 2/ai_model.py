@@ -5,7 +5,7 @@ from google import genai
 from pygame import quit
 
 from utils import app_manager
-from ui_elements import onboarding_elements, home_elements
+from ui_elements import onboarding_elements, home_elements, loading_elements
 
 # Try to get setup the AI client, if an exception occurs, tell the user how to set up the ai
 try:
@@ -19,6 +19,9 @@ except:
     exit() # Close the python program
 
 def generate_workout(data: dict): 
+    # Set the loading state
+    app_manager.change_state("Loading", loading_elements, onboarding_elements)
+    
     # Create custom prompt based on user data
     prompt = f'''
         Generate an at-home workout for this user who has provided this information about themselves:
@@ -55,4 +58,4 @@ def generate_workout(data: dict):
     app_manager.save_workout()
     
     # Change to home state
-    app_manager.change_state("Home", home_elements, onboarding_elements)
+    app_manager.change_state("Home", home_elements, loading_elements)

@@ -56,6 +56,7 @@ class AppManager:
         
         # Application states, used to know what UI elements to show and when. 
         self.states = {
+            "Loading": False,
             "Onboarding": False,
             "Home": False,
         }

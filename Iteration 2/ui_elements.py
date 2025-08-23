@@ -1,6 +1,8 @@
 import pygame_gui
 import pygame
 import warnings
+import os
+import random
 
 from utils import SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
 
@@ -22,6 +24,41 @@ error_notification_heading_label = pygame_gui.elements.UILabel(relative_rect=pyg
 error_notification_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height*19, base_column_width*10, 40),
                                                          text="",
                                                          manager=ui_manager)
+
+# Elements for Loading state
+quotes = [
+    "The only bad workout is the one that didn't happen",
+    "The pain you feel today will be the strength you feel tomorrow",
+    "Strive for progress, not perfection",
+    "You don't have to be extreme, just consistent",
+    "Take care of your body. It's the only place you have to live",
+    "If it doesn't challenge you, it doesn't change you",
+]
+
+loading_label = pygame_gui.elements.UITextBox(
+    relative_rect=pygame.Rect(0, 50, base_column_width*10, 60),
+    html_text=random.choice(quotes),
+    anchors={'center': 'center'},
+    object_id=pygame_gui.core.ObjectID(class_id="@loading_label"),
+    manager=ui_manager
+)
+
+# Load your spinner image
+spinner_image = pygame.image.load(os.path.join("../Assets/loader-circle.png")).convert_alpha()
+
+# Create a UIImage (centered in window)
+loading_spinner = pygame_gui.elements.UIImage(
+    relative_rect=pygame.Rect(0, 0, 40, 40),
+    image_surface=spinner_image,
+    anchors={'center': 'center'},
+    manager=ui_manager
+)
+
+
+loading_elements = [
+    loading_label,
+    loading_spinner
+]
 
 # Onboarding Page
 heading_label = pygame_gui.elements.UILabel(relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
@@ -184,5 +221,5 @@ def load_exercise_elements():
     
 
 # Hide all elements at first
-for element in [*onboarding_elements, *home_elements]:
+for element in [*loading_elements, *onboarding_elements, *home_elements]:
     element.hide()
