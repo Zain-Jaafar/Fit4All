@@ -24,13 +24,13 @@ with open('exercise_directory.json', 'r') as f:
 
 
 error_notification_heading_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 40),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*19.70, base_column_width*10, 40),
     text="",
     manager=ui_manager
 )
 
 error_notification_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*19, base_column_width*10, 40),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*20.3, base_column_width*10, 40),
     text="",
     manager=ui_manager
 )
