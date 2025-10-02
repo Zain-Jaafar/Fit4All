@@ -1,7 +1,8 @@
 {
-    "age": 8,
-    "injuries": "no",
-    "disabilities": "yes",
+    "age": 17,
+    "injuries": "npoe",
+    "disabilities": "no",
     "availability": 60,
+    "weight": "73kgs",
     "other_information": "no"
 }

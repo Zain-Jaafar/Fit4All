@@ -2,6 +2,7 @@ import pygame_gui
 import pygame
 import warnings
 import os
+import json
 import random
 
 from utils import SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
@@ -16,6 +17,11 @@ ui_manager = pygame_gui.UIManager((SCREEN_WIDTH, SCREEN_HEIGHT), 'theme.json')
 
 base_column_width = SCREEN_WIDTH/12
 base_row_height = SCREEN_HEIGHT/24
+
+# Load exercise data from json file
+with open('exercise_directory.json', 'r') as f:
+    EXERCISES = json.load(f)
+
 
 error_notification_heading_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 40),
@@ -73,7 +79,7 @@ heading_label = pygame_gui.elements.UILabel(
 
 age_input = pygame_gui.elements.UITextEntryLine(
     relative_rect=pygame.Rect(base_column_width, base_row_height*3, base_column_width*5, 50),
-    placeholder_text="Enter Age:",
+    placeholder_text="",
     manager=ui_manager
 )
 
@@ -89,7 +95,7 @@ age_label = pygame_gui.elements.UILabel(
 
 injuries_input = pygame_gui.elements.UITextEntryLine(
     relative_rect=pygame.Rect(base_column_width, base_row_height*6, base_column_width*10, 50),
-    placeholder_text="Enter any injuries: ",
+    placeholder_text="",
     manager=ui_manager
 )
 
@@ -105,7 +111,7 @@ injuries_label = pygame_gui.elements.UILabel(
 
 disabilities_input = pygame_gui.elements.UITextEntryLine(
     relative_rect=pygame.Rect(base_column_width, base_row_height*9, base_column_width*10, 50),
-    placeholder_text="Enter any disabilities: ",
+    placeholder_text="",
     manager=ui_manager
 )
 
@@ -121,7 +127,7 @@ disabilities_label = pygame_gui.elements.UILabel(
 
 availability_input = pygame_gui.elements.UITextEntryLine(
     relative_rect=pygame.Rect(base_column_width, base_row_height*12, base_column_width*10, 50),
-    placeholder_text="Enter time available: ",
+    placeholder_text="",
     manager=ui_manager
 )
 
@@ -135,9 +141,25 @@ availability_label = pygame_gui.elements.UILabel(
     manager=ui_manager
 )
 
-other_information_input = pygame_gui.elements.UITextEntryLine(
+weight_input = pygame_gui.elements.UITextEntryLine(
     relative_rect=pygame.Rect(base_column_width, base_row_height*15, base_column_width*10, 50),
-    placeholder_text="Other information: ",
+    placeholder_text="",
+    manager=ui_manager
+)
+
+weight_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(0, -20, -1, 20),
+    text="What is your approximate weight?",
+    anchors={'bottom': 'bottom',
+                'right': 'right',
+                'bottom_target': weight_input,
+                'right_target': weight_input},
+    manager=ui_manager
+)
+
+other_information_input = pygame_gui.elements.UITextEntryLine(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 50),
+    placeholder_text="",
     manager=ui_manager
 )
 
@@ -170,13 +192,21 @@ onboarding_elements = [
     availability_label, 
     other_information_input, 
     other_information_label,
+    weight_input,
+    weight_label,
     onboarding_submit_button,
     error_notification_label,
 ]
 
-back_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
-    text="Back to Workout Generator",
+back_to_onboarding_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*5, 50),
+    text="Workout Generator",
+    manager=ui_manager
+)
+
+exercise_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width*6, base_row_height*21, base_column_width*5, 50),
+    text="Exercise Directory",
     manager=ui_manager
 )
 
@@ -188,7 +218,8 @@ exercise_scroll_container = pygame_gui.elements.UIScrollingContainer(
 )
 
 home_elements = [
-    back_button,
+    back_to_onboarding_button,
+    exercise_directory_button,
     exercise_scroll_container,
 ]
 
@@ -252,6 +283,123 @@ def load_exercise_elements():
     # print(f"exercise_labels: {exercise_labels}, \n home_elements: {home_elements}")
     
 
+# Exercise Directory - Headings
+exercise_directory_heading = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
+    text="Exercise Directory"
+)
+
+arms_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*2, base_column_width*10, 50),
+    text="Arms Exercises",
+    manager=ui_manager
+)
+
+chest_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*4, base_column_width*10, 50),
+    text="Chest Exercises",
+    manager=ui_manager
+)
+
+shoulders_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*6, base_column_width*10, 50),
+    text="Shoulders Exercises",
+    manager=ui_manager
+)
+
+abs_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*8, base_column_width*10, 50),
+    text="Abs Exercises",
+    manager=ui_manager
+)
+
+back_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*10, base_column_width*10, 50),
+    text="Back Exercises",
+    manager=ui_manager
+)
+
+legs_directory_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*12, base_column_width*10, 50),
+    text="Legs Exercises",
+    manager=ui_manager
+)
+
+home_button = pygame_gui.elements.UIButton(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
+    text="Back to Your Workout",
+    manager=ui_manager
+)
+
+exercise_directory_headings_elements = [
+    exercise_directory_heading,
+    arms_directory_button,
+    chest_directory_button,
+    shoulders_directory_button,
+    back_directory_button,
+    abs_directory_button,
+    legs_directory_button,
+    home_button,
+]
+
+def create_exercise_elements(muscle_group):
+    """Generate UI elements for a specific muscle group's exercises"""
+    elements = []
+    
+    # Create heading
+    heading = pygame_gui.elements.UILabel(
+        relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
+        text=f"{muscle_group.title()} Exercises",
+        manager=ui_manager
+    )
+    elements.append(heading)
+    
+    # Create elements for each exercise
+    for index, exercise in enumerate(EXERCISES[muscle_group]):
+        exercise_box = pygame_gui.elements.UITextBox(
+            relative_rect=pygame.Rect(
+                base_column_width, 
+                base_row_height*(3 + index*3), 
+                base_column_width*10, 
+                80
+            ),
+            html_text=f"{exercise['name']} \n{exercise['description']}",
+            manager=ui_manager
+        )
+        elements.append(exercise_box)
+    
+    # Add back button
+    back_to_directory_button = pygame_gui.elements.UIButton(
+        relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
+        text="Back to Exercise Directory",
+        manager=ui_manager
+    )
+    # it will have an index of -1 as it is the last item in the list
+    elements.append(back_to_directory_button)
+    
+    return elements
+
+# Then you can replace the manual element creation with:
+chest_exercises_elements = create_exercise_elements("chest")
+arms_exercises_elements = create_exercise_elements("arms")
+shoulders_exercises_elements = create_exercise_elements("shoulders")
+abs_exercises_elements = create_exercise_elements("abs")
+back_exercises_elements = create_exercise_elements("back")
+legs_exercises_elements = create_exercise_elements("legs")
+
 # Hide all elements at first
-for element in [*loading_elements, *onboarding_elements, *home_elements]:
+for element in [
+    *loading_elements, 
+    *onboarding_elements, 
+    *home_elements, 
+    *exercise_directory_headings_elements, 
+    *chest_exercises_elements,
+    *arms_exercises_elements,
+    *shoulders_exercises_elements,
+    *abs_exercises_elements,
+    *back_exercises_elements,
+    *legs_exercises_elements,
+    ]:
+    
     element.hide()
+

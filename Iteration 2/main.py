@@ -38,7 +38,7 @@ def main():
         ui_manager.update(delta_time)
         
         if app_manager.states["Loading"]:
-            # --- ROTATE SPINNER ---
+            # Rotate spinner
             loading_spinner_angle = (loading_spinner_angle + 180 * delta_time) % 360  # degrees per second
             rotated_image = pygame.transform.rotate(spinner_image, loading_spinner_angle)
 

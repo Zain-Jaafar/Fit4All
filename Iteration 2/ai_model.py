@@ -29,6 +29,7 @@ def generate_workout(data: dict):
         injuries: {data["injuries"]}
         physical disabilities: {data["disabilities"]}
         time available per day in minutes: {data["availability"]}
+        weight (user should have provided units, but if not, assume it is KG): {data["weight"]}
         other information: {data["other_information"]}
     ''' + '''
         only output json.
@@ -49,7 +50,7 @@ def generate_workout(data: dict):
         model="gemini-2.5-flash", contents=prompt
     )
     
-    # Remove unwanted backticks from the LLM's output
+    # Remove unwanted backticks from the LLM output
     cleaned_response = response.text.replace("```json", "").replace("```", "").strip()
     print(cleaned_response)
     

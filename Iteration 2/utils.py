@@ -46,7 +46,7 @@ class SaveManager:
 class AppManager:
     def __init__(self): # Initialise class attributes.
         self.user = None
-        self._workout = []
+        
         
         self.save_manager = SaveManager()
         
@@ -54,12 +54,23 @@ class AppManager:
         self.user_file_name = "user.json"
         self.workout_file_name = "workout.json"
         
-        # Application states, used to know what UI elements to show and when. 
+        # Application states, 
+        # important to keep track of what UI elements to show and when,
+        # as well as what events to check for. 
         self.states = {
             "Loading": False,
             "Onboarding": False,
             "Home": False,
+            "Exercise Directory Headings": False,
+            "Exercise Directory - Arms": False,
+            "Exercise Directory - Chest": False,
+            "Exercise Directory - Shoulders": False,
+            "Exercise Directory - Back": False, 
+            "Exercise Directory - Abs": False, 
+            "Exercise Directory - Legs": False,
         }
+        
+        self._workout = []
     
     # define property "workout"
     @property
@@ -67,8 +78,7 @@ class AppManager:
         return self._workout
     
     # define setter function for workout, 
-    # this runs a callback function whenever self.workout is changed, 
-    # i use it to reload the gui elements which show the workout whenever the workout is changed
+    # this runs a callback function whenever self.workout is changed
     @workout.setter
     def workout(self, value):
         self._workout = value
@@ -76,8 +86,8 @@ class AppManager:
             self.workout_changed_callback()
 
     # set_user method
-    def set_user(self, age, injuries, disabilities, availability, other_information):
-        self.user = User(age, injuries, disabilities, availability, other_information)
+    def set_user(self, age, injuries, disabilities, availability, weight, other_information):
+        self.user = User(age, injuries, disabilities, availability, weight, other_information)
 
     # Method for saving the user
     def save_user(self):
