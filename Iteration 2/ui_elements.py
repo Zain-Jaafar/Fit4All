@@ -379,7 +379,7 @@ def create_exercise_elements(muscle_group):
     
     return elements
 
-# Then you can replace the manual element creation with:
+# Create lists for each muscle group's UI elements
 chest_exercises_elements = create_exercise_elements("chest")
 arms_exercises_elements = create_exercise_elements("arms")
 shoulders_exercises_elements = create_exercise_elements("shoulders")
