@@ -1,0 +1,110 @@
+[
+    {
+        "name": "Warm-up: Jumping Jacks",
+        "description": "Start with feet together and arms at your sides. Jump your feet out to the sides while raising your arms overhead, then jump back to the starting position. Focus on light, controlled movements.",
+        "reps": 20,
+        "sets": 2
+    },
+    {
+        "name": "Warm-up: Arm Circles",
+        "description": "Stand tall with arms extended straight out to your sides. Make small circles forward for 15 repetitions, then immediately switch to making circles backward for 15 repetitions.",
+        "reps": 15,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Leg Swings",
+        "description": "Hold onto a wall or sturdy chair for balance. Swing one leg forward and backward in a controlled motion for 10 repetitions, then swing the same leg side to side for 10 repetitions. Repeat with the other leg.",
+        "reps": 10,
+        "sets": 1
+    },
+    {
+        "name": "Warm-up: Torso Twists",
+        "description": "Stand with feet shoulder-width apart and knees slightly bent. Gently twist your torso from side to side, keeping your hips relatively stable. Perform 10 twists to each side.",
+        "reps": 20,
+        "sets": 1
+    },
+    {
+        "name": "Bodyweight Squats",
+        "description": "Stand with your feet shoulder-width apart, toes pointing slightly out. Lower your hips as if sitting into a chair, keeping your chest up and back straight. Go as deep as comfortable without pain, then push through your heels to return to the starting position.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Elevated Push-ups",
+        "description": "To protect your sprained finger, place your hands on an elevated surface like a counter, sturdy chair, or wall, slightly wider than shoulder-width. Keep your body in a straight line from head to heels. Lower your chest towards the surface, then push back up. Alternatively, perform push-ups on your knees on the floor.",
+        "reps": 12,
+        "sets": 3
+    },
+    {
+        "name": "Reverse Lunges",
+        "description": "Stand tall with your feet together. Step one leg back and lower your hips until both knees are bent at approximately a 90-degree angle (your back knee should hover just above the floor). Push off your back foot to return to the starting position. Alternate legs with each repetition.",
+        "reps": 12,
+        "sets": 3
+    },
+    {
+        "name": "Forearm Plank",
+        "description": "Lie on your stomach, then prop yourself up on your forearms and toes. Keep your body in a straight line from your head to your heels, engaging your core muscles. Avoid letting your hips sag or raising them too high. Hold this position for the specified reps (seconds). This avoids pressure on your sprained finger.",
+        "reps": 45,
+        "sets": 3
+    },
+    {
+        "name": "Glute Bridges",
+        "description": "Lie on your back with your knees bent and feet flat on the floor, hip-width apart. Place your arms by your sides. Lift your hips off the floor until your body forms a straight line from your shoulders to your knees. Squeeze your glutes at the top, then slowly lower your hips back down.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Bird-Dog",
+        "description": "Start on your hands and knees in a tabletop position, with hands directly under shoulders and knees under hips. Extend your right arm straight forward and your left leg straight back simultaneously, keeping your back flat and core engaged. Return to the starting position with control, then alternate to the other side.",
+        "reps": 12,
+        "sets": 3
+    },
+    {
+        "name": "Calf Raises",
+        "description": "Stand tall with your feet hip-width apart. Lift onto the balls of your feet, raising your heels as high as possible. Hold briefly at the top, then slowly lower your heels back down to the floor.",
+        "reps": 20,
+        "sets": 3
+    },
+    {
+        "name": "Crunches",
+        "description": "Lie on your back with your knees bent and feet flat on the floor. Place your hands lightly behind your head or across your chest. Engage your core and lift your head and shoulders off the floor, keeping your lower back pressed down. Slowly lower back down.",
+        "reps": 15,
+        "sets": 3
+    },
+    {
+        "name": "Cool-down: Standing Quad Stretch",
+        "description": "Stand tall, grab one ankle with your hand (use your right hand for your right ankle to avoid straining your sprained left finger) and pull your heel towards your glutes. Keep your knees close together and feel the stretch in the front of your thigh. Hold for 30 seconds per leg.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Hamstring Stretch",
+        "description": "Sit on the floor with one leg extended straight, and the other bent with your foot towards your inner thigh. Lean forward from your hips, keeping your back straight, and reach towards your toes. Hold for 30 seconds per leg.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Triceps Stretch",
+        "description": "Raise one arm overhead, then bend your elbow so your hand goes behind your head. Use your other hand to gently push down on the elbow to deepen the stretch. Hold for 30 seconds per arm.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Chest Stretch (Doorway)",
+        "description": "Stand in a doorway, place your forearms on the doorframe with your elbows bent at 90 degrees. Step slightly forward to feel a stretch across your chest and shoulders. Hold for 30 seconds.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Shoulder Stretch (Cross-body)",
+        "description": "Bring one arm across your body at shoulder height. Use your other arm to gently pull it closer to your chest, feeling the stretch in your shoulder. Hold for 30 seconds per arm.",
+        "reps": 1,
+        "sets": 1
+    },
+    {
+        "name": "Cool-down: Child's Pose",
+        "description": "Kneel on the floor, sit your hips back towards your heels, and extend your arms forward, resting your forehead on the floor. Relax and breathe deeply, allowing your back and hips to gently stretch. Hold for 60 seconds.",
+        "reps": 1,
+        "sets": 1
+    }
+]

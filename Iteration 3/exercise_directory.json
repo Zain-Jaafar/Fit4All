@@ -1,0 +1,158 @@
+{
+    "chest": [
+        {
+            "name": "Wall Pushups",
+            "description": "Stand facing wall, push against it with hands shoulder-width apart."
+        },
+        {
+            "name": "Knee Pushups",
+            "description": "Do pushups with knees on ground instead of feet for easier version."
+        },
+        {
+            "name": "Standard Pushups",
+            "description": "In plank position, lower chest to ground and push back up."
+        },
+        {
+            "name": "Wide Pushups",
+            "description": "Do pushups with hands placed wider than shoulders to target outer chest."
+        },
+        {
+            "name": "Incline Pushups",
+            "description": "Do pushups with hands on elevated surface like chair or bench."
+        },
+        {
+            "name": "Decline Pushups",
+            "description": "Do pushups with feet elevated on stable surface for extra challenge."
+        }
+    ],
+    "arms": [
+        {
+            "name": "Tricep Dips",
+            "description": "Using chair or bench, lower body and push back up focusing on triceps."
+        },
+        {
+            "name": "Diamond Pushups",
+            "description": "Do pushups with hands close together forming diamond shape under chest."
+        },
+        {
+            "name": "Arm Circles",
+            "description": "Stand with arms out, make forward then backward circles of different sizes."
+        },
+        {
+            "name": "Chair Tricep Extensions",
+            "description": "Face away from chair, dip down and up using triceps."
+        },
+        {
+            "name": "Wall Pushups Close Grip",
+            "description": "Do wall pushups with hands closer than shoulder width."
+        },
+        {
+            "name": "Plank Up-Downs",
+            "description": "In plank, lower to forearms then push back up, alternating arms."
+        }
+    ],
+    "shoulders": [
+        {
+            "name": "Pike Pushups",
+            "description": "Form inverted V with body, bend arms to lower head toward ground."
+        },
+        {
+            "name": "Wall Angels",
+            "description": "Against wall, slide arms up and down while maintaining contact."
+        },
+        {
+            "name": "Arm Raises",
+            "description": "Stand straight, raise arms out to sides up to shoulder level."
+        },
+        {
+            "name": "Front Raises",
+            "description": "Stand straight, raise arms in front of you to shoulder height."
+        },
+        {
+            "name": "Shoulder Taps",
+            "description": "Hold plank position while alternating shoulder taps with hands."
+        },
+        {
+            "name": "Reverse Snow Angels",
+            "description": "Lie face down, sweep arms up overhead and back to sides."
+        }
+    ],
+    "back": [
+        {
+            "name": "Superman Holds",
+            "description": "Lie face down, extend arms forward. Lift chest and legs off ground, hold, then lower."
+        },
+        {
+            "name": "Bird Dogs",
+            "description": "On hands and knees, extend opposite arm and leg. Hold, return, then alternate."
+        },
+        {
+            "name": "Wall Slides",
+            "description": "Stand with back against wall. Slide hands up and down the wall in a circular motion."
+        },
+        {
+            "name": "Prone Y Raises",
+            "description": "Lie face down, raise arms in Y position. Hold briefly, then lower."
+        },
+        {
+            "name": "Chair Pulls",
+            "description": "Sitting in chair, grasp sides. Pull chest up while keeping feet planted."
+        },
+        {
+            "name": "Reverse Snow Angels",
+            "description": "Lie face down, make snow angel motion with arms while lifting chest."
+        }
+    ],
+    "abs": [
+        {
+            "name": "Crunches",
+            "description": "Lie on back, knees bent. Lift shoulders off ground using abs, lower back down."
+        },
+        {
+            "name": "Plank Hold",
+            "description": "Hold pushup position on forearms, keeping body straight. Maintain for time."
+        },
+        {
+            "name": "Mountain Climbers",
+            "description": "In plank position, alternate bringing knees toward chest in running motion."
+        },
+        {
+            "name": "Bicycle Crunches",
+            "description": "Lie on back, alternate touching elbow to opposite knee while extending other leg."
+        },
+        {
+            "name": "Dead Bug",
+            "description": "Lie on back, extend opposite arm and leg while keeping others raised."
+        },
+        {
+            "name": "Flutter Kicks",
+            "description": "Lie on back, legs straight. Alternate raising legs up and down in small motions."
+        }
+    ],
+    "legs": [
+        {
+            "name": "Squats",
+            "description": "Stand feet shoulder-width, bend knees to lower body, keep back straight."
+        },
+        {
+            "name": "Lunges",
+            "description": "Take big step forward, lower back knee toward ground, then push back up."
+        },
+        {
+            "name": "Calf Raises",
+            "description": "Stand straight, rise up onto toes then lower heels back down."
+        },
+        {
+            "name": "Wall Sit",
+            "description": "Slide down wall until thighs are parallel to ground, hold position."
+        },
+        {
+            "name": "Step Ups",
+            "description": "Step up onto elevated surface with one leg, then back down. Alternate legs."
+        },
+        {
+            "name": "Glute Bridges",
+            "description": "Lie on back, knees bent, lift hips up and squeeze glutes."
+        }
+    ]
+}
