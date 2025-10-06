@@ -2,7 +2,19 @@ import pygame
 
 from utils import SCREEN, FPS, clock, app_manager
 from events import handle_events
-from ui_elements import ui_manager, onboarding_elements, home_elements, load_exercise_elements, spinner_image, loading_spinner
+from ui_elements import (
+    ui_manager, 
+    onboarding_elements, 
+    home_elements, 
+    load_exercise_elements, 
+    spinner_image, 
+    loading_spinner,
+    exercise_directory_icon,
+    workout_generation_icon,
+    workout_icon,
+    please_generate_workout_label,
+    navigation_icons,
+)
 
 
 def main():
@@ -16,6 +28,9 @@ def main():
     
     # Change to onboarding page
     app_manager.change_state("Onboarding", onboarding_elements, [])
+    workout_icon.enable()
+    workout_generation_icon.disable()
+    exercise_directory_icon.enable()
     
     # Set the starting angle of the loading spinner
     loading_spinner_angle = 0
@@ -26,6 +41,11 @@ def main():
     
     if app_manager.user and app_manager.workout:
         app_manager.change_state("Home", home_elements, onboarding_elements)
+        workout_icon.disable()
+        workout_generation_icon.enable()
+        exercise_directory_icon.enable()
+        
+        please_generate_workout_label.hide()
     
     while True:
         # This limits the framerate to the value of the FPS constant, keeping the application feeling smooth
@@ -46,10 +66,16 @@ def main():
             loading_spinner.set_image(rotated_image)
         
         
-        SCREEN.fill("white") # Set background to white
-        ui_manager.draw_ui(SCREEN) # Display GUI elements on the screen
+        # Set background to white
+        SCREEN.fill("white") 
         
-        # Update the screen
+        # Display GUI elements on the screen
+        ui_manager.draw_ui(SCREEN)
+        
+        # Only draw icons for navigation when not in the loading state.
+        for navigation_icon in navigation_icons:
+            navigation_icon.draw()
+        
         pygame.display.flip()
         
 

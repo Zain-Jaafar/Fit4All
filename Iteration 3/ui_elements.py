@@ -5,7 +5,7 @@ import os
 import json
 import random
 
-from utils import SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
+from utils import SCREEN, SCREEN_WIDTH, SCREEN_HEIGHT, app_manager
 
 # Filter out warnings saying that the "Label Rect is too small for text" using REGEX.
 # Other warnings are still allowed.
@@ -24,13 +24,13 @@ with open('exercise_directory.json', 'r') as f:
 
 
 error_notification_heading_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*19.70, base_column_width*10, 40),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*18.7, base_column_width*10, 40),
     text="",
     manager=ui_manager
 )
 
 error_notification_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*20.3, base_column_width*10, 40),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*19.2, base_column_width*10, 40),
     text="",
     manager=ui_manager
 )
@@ -72,13 +72,13 @@ loading_elements = [
 
 # Onboarding Page
 heading_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 20),
+    relative_rect=pygame.Rect(base_column_width, base_row_height/2, -1, 20),
     text="Welcome To Fit4All",
     manager=ui_manager
 )
 
 age_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*3, base_column_width*5, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*2, base_column_width*5, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -94,7 +94,7 @@ age_label = pygame_gui.elements.UILabel(
 )
 
 injuries_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*6, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*5, base_column_width*10, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -110,7 +110,7 @@ injuries_label = pygame_gui.elements.UILabel(
 )
 
 disabilities_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*9, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*8, base_column_width*10, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -126,7 +126,7 @@ disabilities_label = pygame_gui.elements.UILabel(
 )
 
 availability_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*12, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*11, base_column_width*10, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -142,7 +142,7 @@ availability_label = pygame_gui.elements.UILabel(
 )
 
 weight_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*15, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*14, base_column_width*10, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -158,7 +158,7 @@ weight_label = pygame_gui.elements.UILabel(
 )
 
 other_information_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*18, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*17, base_column_width*10, 50),
     placeholder_text="",
     manager=ui_manager
 )
@@ -174,7 +174,7 @@ other_information_label = pygame_gui.elements.UILabel(
 )
 
 onboarding_submit_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*20, base_column_width*10, 50),
     text="Generate Workout Routine",
     manager=ui_manager
 )
@@ -198,17 +198,6 @@ onboarding_elements = [
     error_notification_label,
 ]
 
-back_to_onboarding_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*5, 50),
-    text="Workout Generator",
-    manager=ui_manager
-)
-
-exercise_directory_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width*6, base_row_height*21, base_column_width*5, 50),
-    text="Exercise Directory",
-    manager=ui_manager
-)
 
 exercise_scroll_container = pygame_gui.elements.UIScrollingContainer(
     relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*20),
@@ -217,15 +206,24 @@ exercise_scroll_container = pygame_gui.elements.UIScrollingContainer(
     manager=ui_manager
 )
 
+please_generate_workout_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(0, 0, -1, 20),
+    text="Please generate a workout routine",
+    anchors={"center": "center"},
+    manager=ui_manager
+)
+
 home_elements = [
-    back_to_onboarding_button,
-    exercise_directory_button,
+    please_generate_workout_label,
     exercise_scroll_container,
 ]
 
 exercise_labels = []
 
 def load_exercise_elements():
+    # Remove the "please generate workout routine" label because we now know the user has a workout routine
+    please_generate_workout_label.kill()
+    
     # Remove old elements
     global exercise_labels
     for label in exercise_labels:
@@ -234,7 +232,7 @@ def load_exercise_elements():
             home_elements.remove(label)
     exercise_labels = []
 
-    # Add new labels
+    # Add new exercise labels
     for index, element in enumerate(app_manager.workout):
         ui_pos_multiplier = 22*5
         
@@ -325,12 +323,6 @@ legs_directory_button = pygame_gui.elements.UIButton(
     manager=ui_manager
 )
 
-home_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
-    text="Back to Your Workout",
-    manager=ui_manager
-)
-
 exercise_directory_headings_elements = [
     exercise_directory_heading,
     arms_directory_button,
@@ -339,7 +331,6 @@ exercise_directory_headings_elements = [
     back_directory_button,
     abs_directory_button,
     legs_directory_button,
-    home_button,
 ]
 
 def create_exercise_elements(muscle_group):
@@ -368,14 +359,15 @@ def create_exercise_elements(muscle_group):
         )
         elements.append(exercise_box)
     
-    # Add back button
-    back_to_directory_button = pygame_gui.elements.UIButton(
-        relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
-        text="Back to Exercise Directory",
-        manager=ui_manager
-    )
-    # it will have an index of -1 as it is the last item in the list
-    elements.append(back_to_directory_button)
+    # DELETE ONCE FINISHED WITH ITERATION 3
+    # # Add back button
+    # back_to_directory_button = pygame_gui.elements.UIButton(
+    #     relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
+    #     text="Back to Exercise Directory",
+    #     manager=ui_manager
+    # )
+    # # it will have an index of -1 as it is the last item in the list
+    # elements.append(back_to_directory_button)
     
     return elements
 
@@ -386,6 +378,75 @@ shoulders_exercises_elements = create_exercise_elements("shoulders")
 abs_exercises_elements = create_exercise_elements("abs")
 back_exercises_elements = create_exercise_elements("back")
 legs_exercises_elements = create_exercise_elements("legs")
+
+
+# Navigation related things
+class ClickableIcon:
+    def __init__(self, image: str, position: list[int, int], size: list[int, int], onclick):
+        self.image = image
+        self.position = position
+        self.size = size
+        
+        self.surface = pygame.image.load(os.path.join(image))
+        self.rect = self.surface.get_rect()
+        self.rect.center = self.position
+        
+        self.onclick = onclick
+        self.enabled = False
+        self.visible = True
+    
+    def on_click(self):
+        if self.enabled:
+            self.onclick()
+    
+    def enable(self):
+        self.enabled = True
+        
+    def disable(self):
+        self.enabled = False
+    
+    def show(self):
+        self.visible = True
+    
+    def hide(self):
+        self.visible = False
+    
+    def draw(self):
+        if self.visible:
+            SCREEN.blit(self.surface, self.rect)
+
+exercise_directory_icon = ClickableIcon(
+    "../Assets/notebook-text.png",
+    (base_column_width*9, base_row_height*23), 
+    (32, 32),
+    lambda: app_manager.change_state(
+        "Exercise Directory Headings", 
+        exercise_directory_headings_elements, 
+        app_manager.current_elements
+    )
+)
+
+workout_icon = ClickableIcon(
+    "../Assets/dumbbell.png",
+    (base_column_width*6, base_row_height*23), 
+    (32, 32),
+    lambda: app_manager.change_state("Home", 
+        home_elements, 
+        app_manager.current_elements
+    )
+)
+
+workout_generation_icon = ClickableIcon(
+    "../Assets/sparkles.png",
+    (base_column_width*3, base_row_height*23), 
+    (32, 32),
+    lambda: app_manager.change_state("Onboarding", 
+        onboarding_elements, 
+        app_manager.current_elements
+    )
+)
+
+navigation_icons = [exercise_directory_icon, workout_icon, workout_generation_icon]
 
 # Hide all elements at first
 for element in [

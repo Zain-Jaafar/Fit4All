@@ -15,14 +15,11 @@ from ui_elements import (
     weight_input,
     other_information_input, 
     onboarding_submit_button, 
-    back_to_onboarding_button,
     error_notification_heading_label,
     error_notification_label,
     loading_label,
     quotes,
     exercise_directory_headings_elements,
-    exercise_directory_button,
-    home_button,
     chest_directory_button,
     chest_exercises_elements,
     arms_directory_button,
@@ -34,7 +31,10 @@ from ui_elements import (
     abs_directory_button,
     abs_exercises_elements,
     legs_directory_button,
-    legs_exercises_elements
+    legs_exercises_elements,
+    exercise_directory_icon,
+    workout_icon,
+    workout_generation_icon,
 )
 
 from utils import app_manager
@@ -56,7 +56,32 @@ def handle_events(events: list[pygame.event.Event]):
     for event in events:
         ui_manager.process_events(event) # Handle pygame_gui GUI Events
         
-        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+        # Mouse click event check
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                mouse_pos = pygame.mouse.get_pos()
+                # Only process clicks if the icon is enabled
+                if exercise_directory_icon.rect.collidepoint(mouse_pos):
+                    exercise_directory_icon.on_click()
+                    workout_icon.enable()
+                    exercise_directory_icon.disable()
+                    workout_generation_icon.enable()
+                
+                elif workout_icon.rect.collidepoint(mouse_pos):
+                    workout_icon.on_click()
+                    workout_icon.disable()
+                    exercise_directory_icon.enable()
+                    workout_generation_icon.enable()
+                    
+                elif workout_generation_icon.rect.collidepoint(mouse_pos):
+                    workout_generation_icon.on_click()
+                    workout_icon.enable()
+                    exercise_directory_icon.enable()
+                    workout_generation_icon.disable()
+            
+                print(workout_generation_icon.enabled, workout_icon.enabled, exercise_directory_icon.enabled)
+                    
+        if event.type == pygame_gui.UI_BUTTON_PRESSED: # Pygame_gui custom event
             # Handle main states
             if app_manager.states["Onboarding"]: # If the user is in the onboarding page
                 if event.ui_element == onboarding_submit_button: # If the user pressed the submit button
@@ -128,47 +153,49 @@ def handle_events(events: list[pygame.event.Event]):
                             error_notification_label.show()
         
             elif app_manager.states["Home"]: # If the user is in the Home page
-                if event.ui_element == back_to_onboarding_button: # If the back button is pressed, move the user back to the onboarding page
-                    app_manager.change_state("Onboarding", onboarding_elements, home_elements)
-                elif event.ui_element == exercise_directory_button: # If exercise directory button is pressed, move the user to the exercise directory
-                    app_manager.change_state("Exercise Directory Headings", exercise_directory_headings_elements, home_elements)
+                pass
             
             # If the user is in the exercise directory headings page, 
             # and they click on one of the buttons for a specific muscle group,
             # send them to the page with exercises corresponding to that muscle group
             elif app_manager.states["Exercise Directory Headings"]:
-                if event.ui_element == home_button:
-                    app_manager.change_state("Home", home_elements, exercise_directory_headings_elements)
                 
                 # potentially rework all these if statements in a way that takes up less space
-                elif event.ui_element == chest_directory_button:
+                if event.ui_element == chest_directory_button:
                     app_manager.change_state("Exercise Directory - Chest", chest_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
                 elif event.ui_element == arms_directory_button:
                     app_manager.change_state("Exercise Directory - Arms", arms_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
                 elif event.ui_element == shoulders_directory_button:
                     app_manager.change_state("Exercise Directory - Shoulders", shoulders_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
                 elif event.ui_element == back_directory_button:
                     app_manager.change_state("Exercise Directory - Back", back_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
                 elif event.ui_element == abs_directory_button:
                     app_manager.change_state("Exercise Directory - Abs", abs_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
                 elif event.ui_element == legs_directory_button:
                     app_manager.change_state("Exercise Directory - Legs", legs_exercises_elements, exercise_directory_headings_elements)
+                    exercise_directory_icon.enable()
             
-            # Generic handler for all exercise directory pages
-            else:
-                # Check if were in any exercise directory page
-                for state, elements in EXERCISE_PAGES.items():
-                    if app_manager.states[state]:
+            # DELETE ONCE FINISHED WITH ITERATION 3
+            # # Generic handler for all exercise directory pages
+            # else:
+            #     # Check if were in any exercise directory page
+            #     for state, elements in EXERCISE_PAGES.items():
+            #         if app_manager.states[state]:
                         
-                        # the -1 index is the final element in the list, 
-                        # which is the position of the back button no matter which 
-                        # exercise directory page the user is in
-                        back_button = elements[-1] 
-                        if event.ui_element == back_button:
-                            app_manager.change_state("Exercise Directory Headings", 
-                                                   exercise_directory_headings_elements, 
-                                                   elements)
-                            break
+            #             # the -1 index is the final element in the list, 
+            #             # which is the position of the back button no matter which 
+            #             # exercise directory page the user is in
+            #             back_button = elements[-1] 
+            #             if event.ui_element == back_button:
+            #                 app_manager.change_state("Exercise Directory Headings", 
+            #                                        exercise_directory_headings_elements, 
+            #                                        elements)
+            #                 break
 
         if event.type == pygame.QUIT: # If the user pressed the close button on the window
             pygame.quit() # Uninitialise/quit pygame

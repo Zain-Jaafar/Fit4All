@@ -5,7 +5,7 @@ from google import genai
 from pygame import quit
 
 from utils import app_manager
-from ui_elements import onboarding_elements, home_elements, loading_elements
+from ui_elements import onboarding_elements, home_elements, loading_elements, navigation_icons
 
 # Try to get setup the AI client, if an exception occurs, tell the user how to set up the ai
 try:
@@ -21,6 +21,9 @@ except:
 def generate_workout(data: dict): 
     # Set the loading state
     app_manager.change_state("Loading", loading_elements, onboarding_elements)
+    
+    # Hide and disable the navigation icons
+    
     
     # Create custom prompt based on user data
     prompt = f'''
