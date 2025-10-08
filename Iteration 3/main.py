@@ -12,6 +12,7 @@ from ui_elements import (
     exercise_directory_icon,
     workout_generation_icon,
     workout_icon,
+    user_manual_icon,
     please_generate_workout_label,
     navigation_icons,
 )
@@ -28,9 +29,12 @@ def main():
     
     # Change to onboarding page
     app_manager.change_state("Onboarding", onboarding_elements, [])
+    
+    # Enable all icons except the workout generation form icon
     workout_icon.enable()
     workout_generation_icon.disable()
     exercise_directory_icon.enable()
+    user_manual_icon.enable()
     
     # Set the starting angle of the loading spinner
     loading_spinner_angle = 0
@@ -41,9 +45,12 @@ def main():
     
     if app_manager.user and app_manager.workout:
         app_manager.change_state("Home", home_elements, onboarding_elements)
+        
+        # Enable all icons except the workout icon
         workout_icon.disable()
         workout_generation_icon.enable()
         exercise_directory_icon.enable()
+        user_manual_icon.enable()
         
         please_generate_workout_label.hide()
     

@@ -22,6 +22,11 @@ base_row_height = SCREEN_HEIGHT/24
 with open('exercise_directory.json', 'r') as f:
     EXERCISES = json.load(f)
 
+# test_button = pygame_gui.elements.UIButton(
+#     relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*4), ## TEST NEWLINE CHARACTERS IN BUTTONS TEXT
+#     text="asdfasdfsadf \n asdfasdfasdf", 
+#     manager=ui_manager,
+# )
 
 error_notification_heading_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width, base_row_height*18.7, base_column_width*10, 40),
@@ -379,6 +384,21 @@ abs_exercises_elements = create_exercise_elements("abs")
 back_exercises_elements = create_exercise_elements("back")
 legs_exercises_elements = create_exercise_elements("legs")
 
+# Get User Manual Text from File
+with open("user_manual.txt", "r") as file:
+    user_manual_text = file.read()
+
+# User Manual Elements
+user_manual = pygame_gui.elements.UITextBox(
+    relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*20),
+    html_text=user_manual_text,
+    manager=ui_manager,
+)
+
+user_manual_elements =[
+    user_manual
+]
+
 
 # Navigation related things
 class ClickableIcon:
@@ -415,9 +435,21 @@ class ClickableIcon:
         if self.visible:
             SCREEN.blit(self.surface, self.rect)
 
+# Initialise navigation icons
+user_manual_icon = ClickableIcon(
+    "../Assets/file-question-mark.png",
+    (base_column_width*9, base_row_height*23), 
+    (32, 32),
+    lambda: app_manager.change_state(
+        "User Manual", 
+        user_manual_elements, 
+        app_manager.current_elements
+    )
+)
+
 exercise_directory_icon = ClickableIcon(
     "../Assets/notebook-text.png",
-    (base_column_width*9, base_row_height*23), 
+    (base_column_width*7, base_row_height*23), 
     (32, 32),
     lambda: app_manager.change_state(
         "Exercise Directory Headings", 
@@ -428,7 +460,7 @@ exercise_directory_icon = ClickableIcon(
 
 workout_icon = ClickableIcon(
     "../Assets/dumbbell.png",
-    (base_column_width*6, base_row_height*23), 
+    (base_column_width*5, base_row_height*23), 
     (32, 32),
     lambda: app_manager.change_state("Home", 
         home_elements, 
@@ -446,7 +478,7 @@ workout_generation_icon = ClickableIcon(
     )
 )
 
-navigation_icons = [exercise_directory_icon, workout_icon, workout_generation_icon]
+navigation_icons = [user_manual_icon, workout_generation_icon, exercise_directory_icon, workout_icon]
 
 # Hide all elements at first
 for element in [
@@ -460,6 +492,7 @@ for element in [
     *abs_exercises_elements,
     *back_exercises_elements,
     *legs_exercises_elements,
+    *user_manual_elements,
     ]:
     
     element.hide()

@@ -35,6 +35,7 @@ from ui_elements import (
     exercise_directory_icon,
     workout_icon,
     workout_generation_icon,
+    user_manual_icon,
 )
 
 from utils import app_manager
@@ -61,25 +62,35 @@ def handle_events(events: list[pygame.event.Event]):
             if event.button == 1:  # Left mouse button
                 mouse_pos = pygame.mouse.get_pos()
                 # Only process clicks if the icon is enabled
-                if exercise_directory_icon.rect.collidepoint(mouse_pos):
+                if exercise_directory_icon.rect.collidepoint(mouse_pos): # If user clicks exercise directory icon
                     exercise_directory_icon.on_click()
                     workout_icon.enable()
                     exercise_directory_icon.disable()
                     workout_generation_icon.enable()
+                    user_manual_icon.enable()
                 
-                elif workout_icon.rect.collidepoint(mouse_pos):
+                elif workout_icon.rect.collidepoint(mouse_pos): # If user clicks workout generation icon
                     workout_icon.on_click()
                     workout_icon.disable()
                     exercise_directory_icon.enable()
                     workout_generation_icon.enable()
+                    user_manual_icon.enable()
                     
-                elif workout_generation_icon.rect.collidepoint(mouse_pos):
+                elif workout_generation_icon.rect.collidepoint(mouse_pos): # If user clicks workout icon
                     workout_generation_icon.on_click()
                     workout_icon.enable()
                     exercise_directory_icon.enable()
                     workout_generation_icon.disable()
+                    user_manual_icon.enable()
+                
+                elif user_manual_icon.rect.collidepoint(mouse_pos): # If user clicks user manual icon
+                    user_manual_icon.on_click()
+                    workout_icon.enable()
+                    exercise_directory_icon.enable()
+                    workout_generation_icon.enable()
+                    user_manual_icon.disable()
             
-                print(workout_generation_icon.enabled, workout_icon.enabled, exercise_directory_icon.enabled)
+                print(workout_generation_icon.enabled, workout_icon.enabled, exercise_directory_icon.enabled, user_manual_icon.enabled)
                     
         if event.type == pygame_gui.UI_BUTTON_PRESSED: # Pygame_gui custom event
             # Handle main states

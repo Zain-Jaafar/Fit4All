@@ -68,6 +68,7 @@ class AppManager:
             "Exercise Directory - Back": False, 
             "Exercise Directory - Abs": False, 
             "Exercise Directory - Legs": False,
+            "User Manual": False,
         }
         
         self.current_elements = []
@@ -119,7 +120,8 @@ class AppManager:
     
     # Method for changing the state of the application.
     def change_state(self, new_state: str, elements_to_show: list, elements_to_hide: list):
-        from ui_elements import navigation_icons, workout_icon, workout_generation_icon, exercise_directory_icon
+        # Import within the function to avoid circular import error
+        from ui_elements import navigation_icons, workout_icon, workout_generation_icon, exercise_directory_icon, user_manual_icon
         
         # Make sure the new_state parameter is valid,
         # then update the states dictionary.
@@ -151,13 +153,16 @@ class AppManager:
                 for icon in navigation_icons:
                     icon.show()
                     icon.enable()
-
+                
+                
                 if self.states["Onboarding"]:
                     workout_generation_icon.disable()
                 elif self.states["Home"]:
                     workout_icon.disable()
                 elif self.states["Exercise Directory Headings"]:
                     exercise_directory_icon.disable()
+                elif self.states["User Manual"]:
+                    user_manual_icon.disable()
 
         # If the state_to_change_to was invalid, then print "Invalid State", useful for debugging
         else:
