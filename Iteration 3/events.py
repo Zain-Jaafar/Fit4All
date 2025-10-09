@@ -52,6 +52,15 @@ EXERCISE_PAGES = {
     "Exercise Directory - Legs": legs_exercises_elements
 }
 
+INPUT_FIELDS = [
+    age_input,
+    injuries_input, 
+    disabilities_input,
+    availability_input,
+    weight_input,
+    other_information_input
+]
+
 # Look through the current events and do things accordingly
 def handle_events(events: list[pygame.event.Event]):
     for event in events:
@@ -91,6 +100,30 @@ def handle_events(events: list[pygame.event.Event]):
                     user_manual_icon.disable()
             
                 print(workout_generation_icon.enabled, workout_icon.enabled, exercise_directory_icon.enabled, user_manual_icon.enabled)
+        
+        # Listen for if the user presses a keyboard button
+        if event.type == pygame.KEYDOWN:
+            if app_manager.states["Onboarding"]:
+                # If the user pressed the TAB button
+                if event.key == pygame.K_TAB: 
+                    # Set focused_index to -1 incase there is no currently focused input box
+                    focused_index = -1
+                    
+                    # Find the index of the currently focused input box
+                    for index, input_field in enumerate(INPUT_FIELDS):
+                        if input_field.is_focused:
+                            focused_index = index
+                            break
+                
+                    # Get the next index using modulo operator
+                    next_index = (focused_index + 1) % len(INPUT_FIELDS)
+                 
+                    # Change the focused input box to the next one
+                    INPUT_FIELDS[next_index].focus()
+                
+                    # Unfocus previous input box if one was focused
+                    if focused_index >= 0:
+                        INPUT_FIELDS[focused_index].unfocus()
                     
         if event.type == pygame_gui.UI_BUTTON_PRESSED: # Pygame_gui custom event
             # Handle main states
