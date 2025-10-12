@@ -111,8 +111,13 @@ def handle_events(events: list[pygame.event.Event]):
                             focused_index = index
                             break
                 
-                    # Get the next index using modulo operator
-                    next_index = (focused_index + 1) % len(INPUT_FIELDS)
+                    # If shift is held, go backwards
+                    if pygame.key.get_mods() & pygame.KMOD_SHIFT:
+                        # Get the previous index using modulo operator
+                        next_index = (focused_index - 1) % len(INPUT_FIELDS)
+                    else:
+                        # Get the next index using modulo operator
+                        next_index = (focused_index + 1) % len(INPUT_FIELDS)
                  
                     # Change the focused input box to the next one
                     INPUT_FIELDS[next_index].focus()
