@@ -14,8 +14,8 @@ from ui_elements import (
     weight_input,
     other_information_input, 
     onboarding_submit_button, 
-    error_notification_heading_label,
-    error_notification_label,
+    age_error_label,
+    availability_error_label,
     loading_label,
     quotes,
     exercise_directory_headings_elements,
@@ -60,6 +60,11 @@ INPUT_FIELDS = [
     other_information_input
 ]
 
+def unfocus_all_inputs():
+    """Helper function to unfocus all input fields"""
+    for input_field in INPUT_FIELDS:
+        input_field.unfocus()
+
 # Look through the current events and do things accordingly
 def handle_events(events: list[pygame.event.Event]):
     for event in events:
@@ -67,30 +72,37 @@ def handle_events(events: list[pygame.event.Event]):
         
         # Mouse click event check
         if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_position = event.pos
             if event.button == 1:  # Left mouse button
-                mouse_pos = pygame.mouse.get_pos()
-                if exercise_directory_icon.rect.collidepoint(mouse_pos): # If user clicks exercise directory icon
+                # First check if we clicked on any input field
+                for input_field in INPUT_FIELDS:
+                    if input_field.rect.collidepoint(mouse_position):
+                        unfocus_all_inputs()  # Unfocus all inputs first
+                        input_field.focus()   # Focus the clicked input
+                        break
+                
+                if exercise_directory_icon.rect.collidepoint(mouse_position): # If user clicks exercise directory icon
                     exercise_directory_icon.on_click()
                     workout_icon.enable()
                     exercise_directory_icon.disable()
                     workout_generation_icon.enable()
                     user_manual_icon.enable()
                 
-                elif workout_icon.rect.collidepoint(mouse_pos): # If user clicks workout generation icon
+                elif workout_icon.rect.collidepoint(mouse_position): # If user clicks workout generation icon
                     workout_icon.on_click()
                     workout_icon.disable()
                     exercise_directory_icon.enable()
                     workout_generation_icon.enable()
                     user_manual_icon.enable()
                     
-                elif workout_generation_icon.rect.collidepoint(mouse_pos): # If user clicks workout icon
+                elif workout_generation_icon.rect.collidepoint(mouse_position): # If user clicks workout icon
                     workout_generation_icon.on_click()
                     workout_icon.enable()
                     exercise_directory_icon.enable()
                     workout_generation_icon.disable()
                     user_manual_icon.enable()
                 
-                elif user_manual_icon.rect.collidepoint(mouse_pos): # If user clicks user manual icon
+                elif user_manual_icon.rect.collidepoint(mouse_position): # If user clicks user manual icon
                     user_manual_icon.on_click()
                     workout_icon.enable()
                     exercise_directory_icon.enable()
@@ -102,7 +114,6 @@ def handle_events(events: list[pygame.event.Event]):
             if app_manager.states["Onboarding"]:
                 # If the user pressed the TAB button
                 if event.key == pygame.K_TAB: 
-                    # Set focused_index to -1 incase there is no currently focused input box
                     focused_index = -1
                     
                     # Find the index of the currently focused input box
@@ -110,27 +121,26 @@ def handle_events(events: list[pygame.event.Event]):
                         if input_field.is_focused:
                             focused_index = index
                             break
-                
+                    
                     # If shift is held, go backwards
                     if pygame.key.get_mods() & pygame.KMOD_SHIFT:
-                        # Get the previous index using modulo operator
                         next_index = (focused_index - 1) % len(INPUT_FIELDS)
                     else:
-                        # Get the next index using modulo operator
                         next_index = (focused_index + 1) % len(INPUT_FIELDS)
-                 
-                    # Change the focused input box to the next one
-                    INPUT_FIELDS[next_index].focus()
-                
-                    # Unfocus previous input box if one was focused
-                    if focused_index >= 0:
-                        INPUT_FIELDS[focused_index].unfocus()
                     
+                    unfocus_all_inputs()  # Unfocus all inputs first
+                    INPUT_FIELDS[next_index].focus()  # Focus the next input
+
         if event.type == pygame_gui.UI_BUTTON_PRESSED: # Pygame_gui custom event
             # Handle main states
             if app_manager.states["Onboarding"]: # If the user is in the onboarding page
                 if event.ui_element == onboarding_submit_button: # If the user pressed the submit button
+                    # Pick a new random quote for the loading screen
                     loading_label.set_text(random.choice(quotes))
+                    
+                    # Hide the error message labels at first
+                    age_error_label.hide()
+                    availability_error_label.hide()
                     
                     try:
                         # Get age and ensure it is withing the bounds
@@ -140,10 +150,10 @@ def handle_events(events: list[pygame.event.Event]):
                         try:
                             age = int(age_text)
                         except ValueError:
-                            raise ValueError("Age:", "Please enter a positive integer under 150.")
+                            raise ValueError("Age", "Please enter a positive integer under 150.")
                         
                         if not(0 < age < 150):
-                            raise ValueError("Age:", "Please enter a positive integer under 150.")
+                            raise ValueError("Age", "Please enter a positive integer under 150.")
                         
                         # Get injuries, disabilities, and weight information
                         injuries = injuries_input.get_text()
@@ -160,10 +170,10 @@ def handle_events(events: list[pygame.event.Event]):
                         try:
                             availability = int(availability_text)
                         except:
-                            raise ValueError("Time Availability:", "Please enter a positive integer under 300.")
+                            raise ValueError("Time Availability", "Please enter a positive integer under 300.")
                         
                         if not(0 < availability < 300):
-                            raise ValueError("Time Availability:", "Please enter a positive integer under 300.")
+                            raise ValueError("Time Availability", "Please enter a positive integer under 300.")
                         
                         # Get info from the "other information" input box
                         other_information = other_information_input.get_text()
@@ -190,12 +200,21 @@ def handle_events(events: list[pygame.event.Event]):
                         
                         # If there an error was raised, 
                         # set the text of the notification labels to be the error message,
-                        error_notification_heading_label.set_text(f"{error_heading}")
-                        error_notification_label.set_text(f"{error_message}")
+                        if error_heading == "Age":
+                            age_error_label.set_text(f"{error_message}")
+                            
+                            # Show the notification label if it is not already shown
+                            if not age_error_label.visible:
+                                age_error_label.show()
+                        elif error_heading == "Time Availability":
+                            availability_error_label.set_text(f"{error_message}")
+                            
+                            # Show the notification label if it is not already shown
+                            if not availability_error_label.visible:
+                                availability_error_label.show()
                         
-                        # Show the notification label if it is not already shown
-                        if not error_notification_label.visible:
-                            error_notification_label.show()
+                        
+                        
         
             elif app_manager.states["Home"]: # If the user is in the Home page
                 

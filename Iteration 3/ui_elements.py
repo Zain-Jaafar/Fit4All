@@ -156,17 +156,6 @@ class ClickableIcon(CustomUIElement):
         if self.visible:
             SCREEN.blit(self.surface, self.rect)
 
-error_notification_heading_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*18.7, base_column_width*10, 40),
-    text="",
-    manager=ui_manager
-)
-
-error_notification_label = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*19.2, base_column_width*10, 40),
-    text="",
-    manager=ui_manager
-)
 
 # Elements for Loading state
 quotes = [
@@ -211,7 +200,7 @@ heading_label = pygame_gui.elements.UILabel(
 )
 
 age_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*2, base_column_width*5, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*2, base_column_width*5, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -226,8 +215,18 @@ age_label = pygame_gui.elements.UILabel(
     manager=ui_manager
 )
 
+age_error_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(0, -4, -1, 20),
+    text="",
+    anchors={'top': 'top',
+                'right': 'right',
+                'top_target': age_input,
+                'right_target': age_input},
+    manager=ui_manager
+)
+
 injuries_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*5, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*5, base_column_width*10, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -243,7 +242,7 @@ injuries_label = pygame_gui.elements.UILabel(
 )
 
 disabilities_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*8, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*8, base_column_width*10, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -259,7 +258,7 @@ disabilities_label = pygame_gui.elements.UILabel(
 )
 
 availability_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*11, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*11, base_column_width*10, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -274,8 +273,18 @@ availability_label = pygame_gui.elements.UILabel(
     manager=ui_manager
 )
 
+availability_error_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(0, -4, -1, 20),
+    text="",
+    anchors={'top': 'top',
+                'right': 'right',
+                'top_target': availability_input,
+                'right_target': availability_input},
+    manager=ui_manager
+)
+
 weight_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*14, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*14, base_column_width*10, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -291,7 +300,7 @@ weight_label = pygame_gui.elements.UILabel(
 )
 
 other_information_input = pygame_gui.elements.UITextEntryLine(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*17, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*17, base_column_width*10, 40),
     placeholder_text="",
     manager=ui_manager
 )
@@ -328,7 +337,8 @@ onboarding_elements = [
     weight_input,
     weight_label,
     onboarding_submit_button,
-    error_notification_label,
+    age_error_label,
+    availability_error_label,
 ]
 
 

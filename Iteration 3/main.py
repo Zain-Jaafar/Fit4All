@@ -71,7 +71,7 @@ def main():
         
         
         # Set background to white
-        SCREEN.fill("#fafafa") 
+        SCREEN.fill("#ffffff") 
         
         # Display GUI elements on the screen
         ui_manager.draw_ui(SCREEN)
