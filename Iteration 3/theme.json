@@ -1,9 +1,20 @@
 {
     "defaults": 
     {
+        "font": {
+            "regular_path": "../Assets/Inter-Regular.ttf",
+            "bold_path": "../Assets/Inter-Bold.ttf"
+        },
         "colours": 
         {
             "normal_text": "black"
+        },
+        "misc": {
+            "state_transitions":
+             {
+                 "normal_hovered": "1",
+                 "hovered_normal": "1"
+             }
         }
     },
     "button":
@@ -54,6 +65,29 @@
     "@loading_label": {
         "misc": {
             "text_horiz_alignment": "center"
+        }
+    },
+    "@exercise_name": {
+        "font": {
+            "bold": "1"
+        }
+    },
+    "@exercise_button": {
+        "colours": {
+            "normal_bg": "#fafafa",
+            "normal_text": "black",
+            "normal_border": "#fafafa",
+            "hovered_bg": "#dddddd",
+            "hovered_text": "black",
+            "hovered_border": "#dddddd",
+            "active_bg": "#cccccc",
+            "active_text": "black",
+            "active_border": "#cccccc"
+        },
+        "misc": {
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "4",
+            "border_width": "0"
         }
     }
 }

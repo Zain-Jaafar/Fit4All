@@ -13,7 +13,6 @@ from ui_elements import (
     workout_generation_icon,
     workout_icon,
     user_manual_icon,
-    please_generate_workout_label,
     navigation_icons,
 )
 
@@ -51,8 +50,6 @@ def main():
         workout_generation_icon.enable()
         exercise_directory_icon.enable()
         user_manual_icon.enable()
-        
-        please_generate_workout_label.hide()
     
     while True:
         # This limits the framerate to the value of the FPS constant, keeping the application feeling smooth
@@ -74,7 +71,7 @@ def main():
         
         
         # Set background to white
-        SCREEN.fill("white") 
+        SCREEN.fill("#fafafa") 
         
         # Display GUI elements on the screen
         ui_manager.draw_ui(SCREEN)

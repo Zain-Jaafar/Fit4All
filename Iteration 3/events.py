@@ -7,7 +7,6 @@ import random
 from ui_elements import (
     ui_manager, 
     onboarding_elements,
-    home_elements,
     age_input, 
     injuries_input, 
     disabilities_input, 
@@ -70,7 +69,6 @@ def handle_events(events: list[pygame.event.Event]):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left mouse button
                 mouse_pos = pygame.mouse.get_pos()
-                # Only process clicks if the icon is enabled
                 if exercise_directory_icon.rect.collidepoint(mouse_pos): # If user clicks exercise directory icon
                     exercise_directory_icon.on_click()
                     workout_icon.enable()
@@ -98,8 +96,6 @@ def handle_events(events: list[pygame.event.Event]):
                     exercise_directory_icon.enable()
                     workout_generation_icon.enable()
                     user_manual_icon.disable()
-            
-                print(workout_generation_icon.enabled, workout_icon.enabled, exercise_directory_icon.enabled, user_manual_icon.enabled)
         
         # Listen for if the user presses a keyboard button
         if event.type == pygame.KEYDOWN:
@@ -197,7 +193,13 @@ def handle_events(events: list[pygame.event.Event]):
                             error_notification_label.show()
         
             elif app_manager.states["Home"]: # If the user is in the Home page
-                pass
+                
+                # If the user clicked one of the "Read More" buttons for the exercises,
+                # run that exercises' on_button_pressed() function
+                for exercise in app_manager.exercise_elements:
+                    if exercise.elements['button'] == event.ui_element:
+                        exercise.on_button_pressed()
+                        break
             
             # If the user is in the exercise directory headings page, 
             # and they click on one of the buttons for a specific muscle group,

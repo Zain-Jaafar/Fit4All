@@ -69,11 +69,13 @@ class AppManager:
             "Exercise Directory - Abs": False, 
             "Exercise Directory - Legs": False,
             "User Manual": False,
+            "Exercise Details": False,
         }
         
         self.current_elements = []
         
         self._workout = []
+        self.exercise_elements = []
     
     # define property "workout"
     @property
@@ -130,8 +132,6 @@ class AppManager:
                 self.states[state] = False
             self.states[new_state] = True
             
-            print(self.states)
-
             # Show all the neccessary elements
             for element in elements_to_show:
                 element.show()

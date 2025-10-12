@@ -22,11 +22,139 @@ base_row_height = SCREEN_HEIGHT/24
 with open('exercise_directory.json', 'r') as f:
     EXERCISES = json.load(f)
 
-# test_button = pygame_gui.elements.UIButton(
-#     relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*4), ## TEST NEWLINE CHARACTERS IN BUTTONS TEXT
-#     text="asdfasdfsadf \n asdfasdfasdf", 
-#     manager=ui_manager,
-# )
+# Custom UI Element/Widjet base class
+class CustomUIElement:
+    def __init__(self, position: list[int, int], size: list[int, int]):
+        self.position = position
+        self.size = size
+        self.visible = True
+        self.enabled = False
+
+    def enable(self):
+        self.enabled = True
+    
+    def disable(self):
+        self.enabled = False
+    
+    def show(self):
+        self.visible = True
+    
+    def hide(self):
+        self.visible = False
+
+# Exercise Element/Widjet class
+class ExerciseElement(CustomUIElement):
+    def __init__(self, 
+                 position: list[int, int], 
+                 size: list[int, int],
+                 exercise_data: dict,
+                 wrapped_description: str,
+                 container,
+                 manager):
+        super().__init__(position, size)
+        self.exercise_data = exercise_data
+        self.wrapped_description = wrapped_description
+        self.container = container
+        self.manager = manager
+        self.elements = {}
+        
+        self.create_elements()
+    
+    # Run this function when the "Read More" button is pressed
+    def on_button_pressed(self):
+        # Set the text of all the elements in the exercise details page to 
+        # represent this exercises information
+        exercise_details_heading.set_text(self.exercise_data["name"])
+        exercise_details_sets.set_text(f"Sets: {self.exercise_data['sets']}")
+        exercise_details_reps.set_text(f"Reps: {self.exercise_data['reps']}")
+        exercise_details_description.set_text(self.exercise_data["description"])
+        
+        # Switch to the Exercise Details page
+        app_manager.change_state("Exercise Details", exercise_details_elements, home_elements)
+    
+    # Create all the UI Elements for this exercise like the name, description, read more button, etc.
+    def create_elements(self):
+        y_position = self.position[1]
+        
+        # Exercise name
+        self.elements['name'] = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, y_position, self.size[0], 20),
+            text=self.exercise_data["name"],
+            container=self.container,
+            object_id=pygame_gui.core.ObjectID(class_id="@exercise_name"),
+            manager=self.manager
+        )
+        
+        # Exercise description
+        self.elements['description'] = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, y_position, self.size[0], base_row_height*2.2),
+            text=self.wrapped_description,
+            container=self.container,
+            manager=self.manager
+        )
+        
+        # Sets
+        self.elements['sets'] = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(0, y_position + base_row_height*2.2, self.size[0]/2, 20),
+            text=f"Sets: {self.exercise_data['sets']}",
+            container=self.container,
+            manager=self.manager
+        )
+        
+        # Reps
+        self.elements['reps'] = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect(base_column_width*6, y_position + base_row_height*2.2, self.size[0]/2, 20),
+            text=f"Reps: {self.exercise_data['reps']}",
+            container=self.container,
+            manager=self.manager
+        )
+        
+        # "Read More" button
+        self.elements['button'] = pygame_gui.elements.UIButton(
+            relative_rect=pygame.Rect(base_column_width*2, y_position + base_row_height*2.2, self.size[0]/3, 20),
+            text="Read More",
+            container=exercise_scroll_container,
+            object_id=pygame_gui.core.ObjectID(class_id="@exercise_button"),
+            manager=ui_manager, 
+        )
+
+    # Show this exercise
+    def show(self):
+        super().show()
+        for element in self.elements.values():
+            element.show()
+    
+    # Hide this exercise
+    def hide(self):
+        super().hide()
+        for element in self.elements.values():
+            element.hide()
+            
+    # Delete this exercise
+    def kill(self):
+        for element in self.elements.values():
+            element.kill()
+
+# Clickable Icon element/widget
+class ClickableIcon(CustomUIElement):
+    def __init__(self, image: str, position: list[int, int], size: list[int, int], onclick):
+        super().__init__(position, size)
+        self.image = image
+        self.onclick = onclick
+        
+        # Load icon image and place it's center at the provided position
+        self.surface = pygame.image.load(os.path.join(image))
+        self.rect = self.surface.get_rect()
+        self.rect.center = self.position
+    
+    # Run when the icon is clicked
+    def on_click(self):
+        if self.enabled:
+            self.onclick()
+    
+    def draw(self):
+        if self.visible:
+            SCREEN.blit(self.surface, self.rect)
 
 error_notification_heading_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width, base_row_height*18.7, base_column_width*10, 40),
@@ -223,68 +351,51 @@ home_elements = [
     exercise_scroll_container,
 ]
 
-exercise_labels = []
 
-def load_exercise_elements():
-    # Remove the "please generate workout routine" label because we now know the user has a workout routine
+def load_exercise_elements():    
+    # Remove label asking user to generate a workout routine 
     please_generate_workout_label.kill()
     
-    # Remove old elements
-    global exercise_labels
-    for label in exercise_labels:
-        label.kill()
-        if label in home_elements:
-            home_elements.remove(label)
-    exercise_labels = []
-
-    # Add new exercise labels
+    # Clear old exercise elements
+    for element in app_manager.exercise_elements:
+        if isinstance(element, ExerciseElement):
+            element.kill()
+        else:
+            element.kill()
+            if element in home_elements:
+                home_elements.remove(element)
+    app_manager.exercise_elements = []
+    
+    # Add new elements
     for index, element in enumerate(app_manager.workout):
         ui_pos_multiplier = 22*5
+        y_position = index * ui_pos_multiplier + 4
         
         # Format description text with newlines every 40 characters
-        desc_text = element["description"]
-        wrapped_desc = ""
-        while len(desc_text) > 40:
-            # Find the last space before 40 characters
-            split_index = desc_text[:40].rfind(' ')
-            if split_index == -1:  # No space found, force split at 40
+        description_text = element["description"]
+        wrapped_description = ""
+        while len(description_text) > 40:
+            split_index = description_text[:40].rfind(' ')
+            if split_index == -1:
                 split_index = 30
-            wrapped_desc += desc_text[:split_index] + '\n'
-            desc_text = desc_text[split_index:].lstrip()
-        wrapped_desc += desc_text  # Add remaining text
-        
-        # Create labels for displaying the workout exercise information
-        name_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, 20),
-            text=element["name"],
+            wrapped_description += description_text[:split_index] + '\n'
+            description_text = description_text[split_index:].lstrip()
+        wrapped_description += description_text
+
+        # Create exercise element
+        exercise_element = ExerciseElement(
+            position=[0, y_position],
+            size=[base_column_width*10, base_row_height*3.5],
+            exercise_data=element,
+            wrapped_description=wrapped_description,
             container=exercise_scroll_container,
-            manager=ui_manager,
-        )
-        description_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + 4, base_column_width*10, base_row_height*2.2),
-            text=wrapped_desc,
-            container=exercise_scroll_container,
-            manager=ui_manager,
-        )
-        sets_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(0, index*ui_pos_multiplier + base_row_height*2.2, base_column_width*5, 20),
-            text=f"Sets: {element['sets']}",
-            container=exercise_scroll_container,
-            manager=ui_manager,
-        )
-        reps_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect(base_column_width*5, index*ui_pos_multiplier + base_row_height*2.2, base_column_width*5, 20),
-            text=f"Reps: {element['reps']}",
-            container=exercise_scroll_container,
-            manager=ui_manager,
+            manager=ui_manager
         )
         
-        # Add the new elements for each exercise to the home_elements and exercise_elements list to manage them in the future.
-        home_elements.extend([name_label, description_label, sets_label, reps_label])
-        exercise_labels.extend([name_label, description_label, sets_label, reps_label])
-    
-    # print(f"exercise_labels: {exercise_labels}, \n home_elements: {home_elements}")
-    
+        # Add the exercise to home_elements and the app_manager.exercise_elements
+        home_elements.append(exercise_element)
+        app_manager.exercise_elements.append(exercise_element)
+
 
 # Exercise Directory - Headings
 exercise_directory_heading = pygame_gui.elements.UILabel(
@@ -399,41 +510,39 @@ user_manual_elements =[
     user_manual
 ]
 
+# Exercise Details page elements
+exercise_details_heading = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width, base_row_height, -1, 30),
+    text="Name",
+    object_id=pygame_gui.core.ObjectID(class_id="@exercise_name"),
+    manager=ui_manager,
+)
 
-# Navigation related things
-class ClickableIcon:
-    def __init__(self, image: str, position: list[int, int], size: list[int, int], onclick):
-        self.image = image
-        self.position = position
-        self.size = size
-        
-        self.surface = pygame.image.load(os.path.join(image))
-        self.rect = self.surface.get_rect()
-        self.rect.center = self.position
-        
-        self.onclick = onclick
-        self.enabled = False
-        self.visible = True
-    
-    def on_click(self):
-        if self.enabled:
-            self.onclick()
-    
-    def enable(self):
-        self.enabled = True
-        
-    def disable(self):
-        self.enabled = False
-    
-    def show(self):
-        self.visible = True
-    
-    def hide(self):
-        self.visible = False
-    
-    def draw(self):
-        if self.visible:
-            SCREEN.blit(self.surface, self.rect)
+exercise_details_sets = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*2, -1, 30),
+    text="Sets: ",
+    manager=ui_manager,
+)
+
+exercise_details_reps = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*7, base_row_height*2, -1, 30),
+    text="Reps: ",
+    manager=ui_manager,
+)
+
+exercise_details_description = pygame_gui.elements.UITextBox(
+    relative_rect=pygame.Rect(base_column_width, base_row_height*3, base_column_width*10, base_row_height*18),
+    html_text="",
+    manager=ui_manager,
+)
+
+
+exercise_details_elements = [
+    exercise_details_heading,
+    exercise_details_description,
+    exercise_details_sets,
+    exercise_details_reps,
+]
 
 # Initialise navigation icons
 user_manual_icon = ClickableIcon(
@@ -493,6 +602,7 @@ for element in [
     *back_exercises_elements,
     *legs_exercises_elements,
     *user_manual_elements,
+    *exercise_details_elements,
     ]:
     
     element.hide()
