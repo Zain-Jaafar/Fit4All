@@ -184,7 +184,7 @@ def handle_events(events: list[pygame.event.Event]):
                         
                         # Run the `generate_workout()` function in a seperate 
                         # thread to prevent blocking the main thread and causing the application to stop responding 
-                        workout_generation_thread = threading.Thread(target=generate_workout, args=(app_manager.user.data,), daemon=True)
+                        workout_generation_thread = threading.Thread(target=generate_workout, args=(app_manager.user_data,), daemon=True)
                         workout_generation_thread.start()
                         
                         # Disable all the elements in the onboarding 

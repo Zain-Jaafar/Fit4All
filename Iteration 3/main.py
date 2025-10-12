@@ -42,7 +42,7 @@ def main():
     app_manager.load_user()
     app_manager.load_workout()
     
-    if app_manager.user and app_manager.workout:
+    if app_manager.user_data and app_manager.workout:
         app_manager.change_state("Home", home_elements, onboarding_elements)
         
         # Enable all icons except the workout icon

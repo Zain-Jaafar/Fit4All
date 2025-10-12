@@ -5,7 +5,7 @@ from google import genai
 from pygame import quit
 
 from utils import app_manager
-from ui_elements import onboarding_elements, home_elements, loading_elements, navigation_icons
+from ui_elements import onboarding_elements, home_elements, loading_elements
 
 # Try to get setup the AI client, if an exception occurs, tell the user how to set up the ai
 try:

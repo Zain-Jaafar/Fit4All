@@ -6,8 +6,6 @@ import json
 import os
 from dotenv import load_dotenv
 
-from user import User
-
 # Initialise pygame
 pygame.init()
 
@@ -45,8 +43,8 @@ class SaveManager:
 
 class AppManager:
     def __init__(self): # Initialise class attributes.
-        self.user = None
-        
+        # Replace self.user with self.user_data
+        self.user_data = None
         
         self.save_manager = SaveManager()
         
@@ -92,24 +90,25 @@ class AppManager:
 
     # set_user method
     def set_user(self, age, injuries, disabilities, availability, weight, other_information):
-        self.user = User(age, injuries, disabilities, availability, weight, other_information)
+        self.user_data = {
+            "age": age,
+            "injuries": injuries,
+            "disabilities": disabilities,
+            "availability": availability,
+            "weight": weight,
+            "other_information": other_information
+        }
 
     # Method for saving the user
     def save_user(self):
-        self.save_manager.save(self.user_file_name, self.user.data)
+        self.save_manager.save(self.user_file_name, self.user_data)
     
     # Method for loading the user
     def load_user(self):
-        # Get the data from the user.json, which is a dictionary, and convert the values to a list
         user_data = self.save_manager.load(self.user_file_name)
-        
         if user_data:
-            cleaned_user_data = list(user_data.values())
-            
-            # The * is the unpack operator, 
-            # it allows me to pass all the elements in the list as arguments for the user object 
-            self.user = User(*cleaned_user_data)
-    
+            self.user_data = user_data
+
     # Methods for saving and loading the workout routine    
     def save_workout(self):
         self.save_manager.save(self.workout_file_name, self.workout)
