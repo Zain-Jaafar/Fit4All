@@ -43,7 +43,6 @@ class SaveManager:
 
 class AppManager:
     def __init__(self): # Initialise class attributes.
-        # Replace self.user with self.user_data
         self.user_data = None
         
         self.save_manager = SaveManager()

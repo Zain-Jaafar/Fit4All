@@ -31,13 +31,17 @@
     {
         "colours":
         {
-            "normal_text": "#FFFFFF",
-            "selected_text": "#FFFFFF",
-            "text_cursor": "#FFFFFF"
+            "normal_text": "#000000",
+            "dark_bg": "#f0faff",
+            "selected_text": "#000000",
+            "selected_bg": "#f0faff",
+            "text_cursor": "#000000"
         },
         "misc":
         {
-            "padding": "20,0"
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "10",
+            "padding": "10,0"
         }
     },
     "text_box":
@@ -45,13 +49,15 @@
         "colours":
         {
             "dark_bg": "#FFFFFF",
-            "normal_border": "#FFFFFF"
+            "normal_border": "#d3dbdf"
         },
         "misc":
         {
-            "line_spacing": 1,
-            "border-width": 0,
-            "shadow-width": 0
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "10",
+            "line_spacing": "1",
+            "border_width": "1",
+            "shadow_width": "0"
         }
     },
     "label":
@@ -87,6 +93,18 @@
         "misc": {
             "shape": "rounded_rectangle",
             "shape_corner_radius": "4",
+            "border_width": "0"
+        }
+    },
+    "@regular_button": {
+        "colours": {
+            "normal_bg": "#2b39ff",
+            "hovered_bg": "#2835e8",
+            "active_bg": "#2530d2"
+        },
+        "misc": {
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "10",
             "border_width": "0"
         }
     }

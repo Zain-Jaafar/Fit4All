@@ -318,6 +318,7 @@ other_information_label = pygame_gui.elements.UILabel(
 onboarding_submit_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*20, base_column_width*10, 50),
     text="Generate Workout Routine",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
@@ -416,36 +417,42 @@ exercise_directory_heading = pygame_gui.elements.UILabel(
 arms_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*2, base_column_width*10, 50),
     text="Arms Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
 chest_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*4, base_column_width*10, 50),
     text="Chest Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
 shoulders_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*6, base_column_width*10, 50),
     text="Shoulders Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
 abs_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*8, base_column_width*10, 50),
     text="Abs Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
 back_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*10, base_column_width*10, 50),
     text="Back Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
 legs_directory_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*12, base_column_width*10, 50),
     text="Legs Exercises",
+    object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
