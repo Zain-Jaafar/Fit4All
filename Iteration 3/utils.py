@@ -121,7 +121,7 @@ class AppManager:
     # Method for changing the state of the application.
     def change_state(self, new_state: str, elements_to_show: list, elements_to_hide: list):
         # Import within the function to avoid circular import error
-        from ui_elements import navigation_icons, workout_icon, workout_generation_icon, exercise_directory_icon, user_manual_icon
+        from ui_elements import navigation_elements, workout_icon, workout_generation_icon, exercise_directory_icon, user_manual_icon
         
         # Make sure the new_state parameter is valid,
         # then update the states dictionary.
@@ -144,11 +144,11 @@ class AppManager:
             
             # Update navigation icon states based on current state
             if new_state == "Loading":
-                for icon in navigation_icons:
+                for icon in navigation_elements:
                     icon.hide()
                     icon.disable()
             else:
-                for icon in navigation_icons:
+                for icon in navigation_elements:
                     icon.show()
                     icon.enable()
                 

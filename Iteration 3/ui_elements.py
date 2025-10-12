@@ -316,7 +316,7 @@ other_information_label = pygame_gui.elements.UILabel(
 )
 
 onboarding_submit_button = pygame_gui.elements.UIButton(
-    relative_rect=pygame.Rect(base_column_width, base_row_height*20, base_column_width*10, 50),
+    relative_rect=pygame.Rect(base_column_width, base_row_height*19, base_column_width*10, 50),
     text="Generate Workout Routine",
     object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
@@ -564,7 +564,7 @@ exercise_details_elements = [
 # Initialise navigation icons
 user_manual_icon = ClickableIcon(
     "../Assets/file-question-mark.png",
-    (base_column_width*9, base_row_height*23), 
+    (base_column_width*10, base_row_height*22), 
     (32, 32),
     lambda: app_manager.change_state(
         "User Manual", 
@@ -573,9 +573,22 @@ user_manual_icon = ClickableIcon(
     )
 )
 
+# Labels to explain what the icon is for, positioned under the icons
+user_manual_nav_label_1 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*10-16, base_row_height*22+13, -1, 20),
+    text="User",
+    manager=ui_manager
+)
+
+user_manual_nav_label_2 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*10-26, base_row_height*22+24, -1, 20),
+    text="Manual",
+    manager=ui_manager
+)
+
 exercise_directory_icon = ClickableIcon(
     "../Assets/notebook-text.png",
-    (base_column_width*7, base_row_height*23), 
+    (base_column_width*7.25, base_row_height*22), 
     (32, 32),
     lambda: app_manager.change_state(
         "Exercise Directory Headings", 
@@ -584,9 +597,22 @@ exercise_directory_icon = ClickableIcon(
     )
 )
 
+# Labels to explain what the icon is for, positioned under the icons
+exercise_directory_nav_label_1 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*7.25-27, base_row_height*22+13, -1, 20),
+    text="Exercise",
+    manager=ui_manager
+)
+
+exercise_directory_nav_label_2 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*7.25-30, base_row_height*22+24, -1, 20),
+    text="Directory",
+    manager=ui_manager
+)
+
 workout_icon = ClickableIcon(
     "../Assets/dumbbell.png",
-    (base_column_width*5, base_row_height*23), 
+    (base_column_width*4.75, base_row_height*22), 
     (32, 32),
     lambda: app_manager.change_state("Home", 
         home_elements, 
@@ -594,9 +620,16 @@ workout_icon = ClickableIcon(
     )
 )
 
+# Label to explain what the icon is for, positioned under the icons
+workout_nav_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*4.75-28, base_row_height*22+13, -1, 20),
+    text="Workout",
+    manager=ui_manager
+)
+
 workout_generation_icon = ClickableIcon(
     "../Assets/sparkles.png",
-    (base_column_width*3, base_row_height*23), 
+    (base_column_width*2, base_row_height*22), 
     (32, 32),
     lambda: app_manager.change_state("Onboarding", 
         onboarding_elements, 
@@ -604,7 +637,20 @@ workout_generation_icon = ClickableIcon(
     )
 )
 
-navigation_icons = [user_manual_icon, workout_generation_icon, exercise_directory_icon, workout_icon]
+# Labels to explain what the icon is for, positioned under the icons
+workout_generation_nav_label_1 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*2-31, base_row_height*22+13, -1, 20),
+    text="Generate",
+    manager=ui_manager
+)
+
+workout_generation_nav_label_2 = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect(base_column_width*2-29, base_row_height*22+24, -1, 20),
+    text="Workout",
+    manager=ui_manager
+)
+
+navigation_elements = [user_manual_icon, workout_generation_icon, exercise_directory_icon, workout_icon]
 
 # Hide all elements at first
 for element in [

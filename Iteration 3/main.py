@@ -13,7 +13,7 @@ from ui_elements import (
     workout_generation_icon,
     workout_icon,
     user_manual_icon,
-    navigation_icons,
+    navigation_elements,
 )
 
 
@@ -77,7 +77,7 @@ def main():
         ui_manager.draw_ui(SCREEN)
         
         # Only draw icons for navigation when not in the loading state.
-        for navigation_icon in navigation_icons:
+        for navigation_icon in navigation_elements:
             navigation_icon.draw()
         
         pygame.display.flip()
