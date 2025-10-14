@@ -18,3 +18,5 @@ Privacy Policy:
 Any data you enter into Fit4All will not be directly traced back to you. 
 Data entered into the AI workout generation form is shared with Google Gemini, but is not directly linked to you, and is not shared with any other third-parties.
 
+Icons:
+Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2023 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2025.
