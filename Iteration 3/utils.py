@@ -1,4 +1,4 @@
-# This file is used to initialise and define various constants and utility functions which will be used throughout the app
+# This file is used to initialise and define various constants and utility functions/classes which will be used throughout the app
 
 import pygame
 import json
@@ -24,6 +24,9 @@ pygame.display.set_caption("Fit4All") # Sets the title of the window
 file_path = os.path.abspath(__file__)
 os.chdir(os.path.dirname(file_path))
 
+# Display icon in the top-left corner of the window next to the window title
+fit4all_logo = pygame.image.load(os.path.join("../Assets/Fit4All Logo.png")).convert_alpha()
+pygame.display.set_icon(fit4all_logo)
 
 FPS = 60 # This variable defines the desired framerate/refresh rate for the rindow
 clock = pygame.time.Clock() # Instantiate the pygame Clock, this is used to keep track of the framerate
@@ -56,7 +59,7 @@ class AppManager:
         # as well as what events to check for. 
         self.states = {
             "Loading": False,
-            "Onboarding": False,
+            "Workout Generation Form": False,
             "Home": False,
             "Exercise Directory Headings": False,
             "Exercise Directory - Arms": False,
@@ -153,7 +156,7 @@ class AppManager:
                     icon.enable()
                 
                 
-                if self.states["Onboarding"]:
+                if self.states["Workout Generation Form"]:
                     workout_generation_icon.disable()
                 elif self.states["Home"]:
                     workout_icon.disable()

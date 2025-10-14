@@ -1,3 +1,6 @@
+# This file is where I interface with the Google Gemini AI LLM 
+# to generate a workout routine based on information provided by the user.
+
 import json
 from sys import exit
 from time import sleep
@@ -5,11 +8,12 @@ from google import genai
 from pygame import quit
 
 from utils import app_manager
-from ui_elements import onboarding_elements, home_elements, loading_elements
+from ui_elements import workout_generation_form_elements, home_elements, loading_elements
 
 # Try to get setup the AI client, if an exception occurs, tell the user how to set up the ai
 try:
     # Store the API key in a .env file for security purposes, DONT PUSH THE .ENV FILE TO GITHUB
+    # Instructions for what to do are in the README.md file
     client = genai.Client()
 except:
     print("\n!!! Please check the README.md file for instructions to get the AI model working !!!\n")
@@ -20,7 +24,7 @@ except:
 
 def generate_workout(data: dict): 
     # Set the loading state
-    app_manager.change_state("Loading", loading_elements, onboarding_elements)
+    app_manager.change_state("Loading", loading_elements, workout_generation_form_elements)
     
     # Hide and disable the navigation icons
     
@@ -32,7 +36,7 @@ def generate_workout(data: dict):
         injuries: {data["injuries"]}
         physical disabilities: {data["disabilities"]}
         time available per day in minutes: {data["availability"]}
-        weight (user should have provided units, but if not, assume it is KG): {data["weight"]}
+        weight (assume kilograms if not specified): {data["weight"]}
         other information: {data["other_information"]}
     ''' + '''
         only output json.
@@ -46,6 +50,10 @@ def generate_workout(data: dict):
                     "sets": "int, number of sets"
                 }
             ]
+        Important:
+            - The output **must be valid JSON parsable by Python's `json` module**.
+            - Do not include comments or text outside the JSON.
+            - Adapt or exclude any exercises which may aggrivate the user's injuries or physical disabilities (if they have any).
     '''
     
     # send prompt to the AI LLM and wait for a response

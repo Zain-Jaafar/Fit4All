@@ -1,10 +1,12 @@
+# This file is where I link everything together and run the main loop of the application.
+
 import pygame
 
 from utils import SCREEN, FPS, clock, app_manager
 from events import handle_events
 from ui_elements import (
     ui_manager, 
-    onboarding_elements, 
+    workout_generation_form_elements, 
     home_elements, 
     load_exercise_elements, 
     spinner_image, 
@@ -14,6 +16,7 @@ from ui_elements import (
     workout_icon,
     user_manual_icon,
     navigation_elements,
+    ClickableIcon
 )
 
 
@@ -26,8 +29,8 @@ def main():
     # Set the callback function which runs whenever app_manager.workout is changed
     app_manager.workout_changed_callback = load_exercise_elements
     
-    # Change to onboarding page
-    app_manager.change_state("Onboarding", onboarding_elements, [])
+    # Change to workout generation form page
+    app_manager.change_state("Workout Generation Form", workout_generation_form_elements, [])
     
     # Enable all icons except the workout generation form icon
     workout_icon.enable()
@@ -43,7 +46,7 @@ def main():
     app_manager.load_workout()
     
     if app_manager.user_data and app_manager.workout:
-        app_manager.change_state("Home", home_elements, onboarding_elements)
+        app_manager.change_state("Home", home_elements, workout_generation_form_elements)
         
         # Enable all icons except the workout icon
         workout_icon.disable()
@@ -59,7 +62,13 @@ def main():
         handle_events(pygame.event.get()) # Call event loop
         
         # Update UI elements
-        ui_manager.update(delta_time)
+        try:
+            # Sometimes this function causes an exception so rerun it if it does
+            ui_manager.update(delta_time)
+        except:
+            print("ui_manager.update() exception")
+            ui_manager.update(delta_time)
+        
         
         if app_manager.states["Loading"]:
             # Rotate spinner
@@ -77,9 +86,11 @@ def main():
         ui_manager.draw_ui(SCREEN)
         
         # Only draw icons for navigation when not in the loading state.
-        for navigation_icon in navigation_elements:
-            navigation_icon.draw()
+        for navigation_element in navigation_elements:
+            if type(navigation_element) == ClickableIcon:
+                navigation_element.draw()
         
+        # Update the screen
         pygame.display.flip()
         
 

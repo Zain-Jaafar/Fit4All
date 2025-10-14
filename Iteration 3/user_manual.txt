@@ -1,13 +1,20 @@
-User Manual:
+DISCLAIMER:
+Workout routines created by Fit4All are AI generated, please be careful when doing the exercises and stop if you feel pain, 
+especially if you have any injuries or physical disabilities.
 
 Usage:
 To generate a workout, click on the Sparkles icon. 
-Enter your information and press "Generate Workout Routine"
+Enter your information and press "Generate Workout Routine".
 All input fields are optional except the age and "time available per day" inputs.
+The input field for weight defaults to Kilograms, but you can write whatever unit you want.
 Once the generation is complete, you will be able to view your workout routine in the workout page.
-
-If you want to find out about new exercises, look at the Exercise Directory page. There, you can click on which muscle group you would like to focus on, and learn new exercises you can try out.
+To learn about new exercises go to the Exercise Directory page. Click on the muscle group you want to view exercises for.
 
 Definitions:
 Reps - Repetions, means the number of times to do the exercise per Set. 
 Sets - means the number of groups of reps to do for the exercise.
+
+Privacy Policy:
+Any data you enter into Fit4All will not be directly traced back to you. 
+Data entered into the AI workout generation form is shared with Google Gemini, but is not directly linked to you, and is not shared with any other third-parties.
+

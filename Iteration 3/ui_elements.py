@@ -1,3 +1,5 @@
+# This file is where I create all the ui elements/widget that get displayed to the screen.
+
 import pygame_gui
 import pygame
 import warnings
@@ -152,7 +154,9 @@ class ClickableIcon(CustomUIElement):
         if self.enabled:
             self.onclick()
     
+    # This method is ran every frame
     def draw(self):
+        # If this element is set to visible, display it on the screen at it's designated position
         if self.visible:
             SCREEN.blit(self.surface, self.rect)
 
@@ -186,13 +190,12 @@ loading_spinner = pygame_gui.elements.UIImage(
     manager=ui_manager
 )
 
-
 loading_elements = [
     loading_label,
     loading_spinner
 ]
 
-# Onboarding Page
+# Workout Generation Form Page
 heading_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width, base_row_height/2, -1, 20),
     text="Welcome To Fit4All",
@@ -208,6 +211,7 @@ age_input = pygame_gui.elements.UITextEntryLine(
 age_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
     text="What is your age?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': age_input,
@@ -218,6 +222,7 @@ age_label = pygame_gui.elements.UILabel(
 age_error_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -4, -1, 20),
     text="",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'top': 'top',
                 'right': 'right',
                 'top_target': age_input,
@@ -234,6 +239,7 @@ injuries_input = pygame_gui.elements.UITextEntryLine(
 injuries_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
     text="Got any injuries? If so, what kind?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': injuries_input,
@@ -250,6 +256,7 @@ disabilities_input = pygame_gui.elements.UITextEntryLine(
 disabilities_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
     text="Got any disabilities? If so, what kind?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': disabilities_input,
@@ -265,7 +272,8 @@ availability_input = pygame_gui.elements.UITextEntryLine(
 
 availability_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
-    text="How many minutes/day can you exercise?",
+    text="How many minutes per day can you exercise?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': availability_input,
@@ -276,6 +284,7 @@ availability_label = pygame_gui.elements.UILabel(
 availability_error_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -4, -1, 20),
     text="",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'top': 'top',
                 'right': 'right',
                 'top_target': availability_input,
@@ -292,6 +301,7 @@ weight_input = pygame_gui.elements.UITextEntryLine(
 weight_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
     text="What is your approximate weight?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': weight_input,
@@ -308,6 +318,7 @@ other_information_input = pygame_gui.elements.UITextEntryLine(
 other_information_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(0, -20, -1, 20),
     text="Any other information?",
+    object_id=pygame_gui.core.ObjectID(class_id="@input_label"),
     anchors={'bottom': 'bottom',
                 'right': 'right',
                 'bottom_target': other_information_input,
@@ -315,15 +326,15 @@ other_information_label = pygame_gui.elements.UILabel(
     manager=ui_manager
 )
 
-onboarding_submit_button = pygame_gui.elements.UIButton(
+workout_generation_form_submit_button = pygame_gui.elements.UIButton(
     relative_rect=pygame.Rect(base_column_width, base_row_height*19, base_column_width*10, 50),
     text="Generate Workout Routine",
     object_id= pygame_gui.core.ObjectID(class_id="@regular_button"),
     manager=ui_manager
 )
 
-# List of elements in onboarding page
-onboarding_elements = [
+# List of elements in Workout Generation Form page
+workout_generation_form_elements = [
     heading_label, 
     age_input, 
     age_label, 
@@ -337,12 +348,12 @@ onboarding_elements = [
     other_information_label,
     weight_input,
     weight_label,
-    onboarding_submit_button,
+    workout_generation_form_submit_button,
     age_error_label,
     availability_error_label,
 ]
 
-
+# Elements for the home page
 exercise_scroll_container = pygame_gui.elements.UIScrollingContainer(
     relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*20),
     should_grow_automatically=True,
@@ -363,7 +374,7 @@ home_elements = [
 ]
 
 
-def load_exercise_elements():    
+def load_exercise_elements(): 
     # Remove label asking user to generate a workout routine 
     please_generate_workout_label.kill()
     
@@ -466,8 +477,8 @@ exercise_directory_headings_elements = [
     legs_directory_button,
 ]
 
-def create_exercise_elements(muscle_group):
-    """Generate UI elements for a specific muscle group's exercises"""
+# Generate UI elements for a specific muscle group's exercises
+def create_exercise_directory_elements(muscle_group) -> list:
     elements = []
     
     # Create heading
@@ -492,25 +503,15 @@ def create_exercise_elements(muscle_group):
         )
         elements.append(exercise_box)
     
-    # DELETE ONCE FINISHED WITH ITERATION 3
-    # # Add back button
-    # back_to_directory_button = pygame_gui.elements.UIButton(
-    #     relative_rect=pygame.Rect(base_column_width, base_row_height*21, base_column_width*10, 50),
-    #     text="Back to Exercise Directory",
-    #     manager=ui_manager
-    # )
-    # # it will have an index of -1 as it is the last item in the list
-    # elements.append(back_to_directory_button)
-    
     return elements
 
-# Then you can replace the manual element creation with:
-chest_exercises_elements = create_exercise_elements("chest")
-arms_exercises_elements = create_exercise_elements("arms")
-shoulders_exercises_elements = create_exercise_elements("shoulders")
-abs_exercises_elements = create_exercise_elements("abs")
-back_exercises_elements = create_exercise_elements("back")
-legs_exercises_elements = create_exercise_elements("legs")
+# Create exercise directory elements, organised by muscle groups
+chest_exercises_elements = create_exercise_directory_elements("chest")
+arms_exercises_elements = create_exercise_directory_elements("arms")
+shoulders_exercises_elements = create_exercise_directory_elements("shoulders")
+abs_exercises_elements = create_exercise_directory_elements("abs")
+back_exercises_elements = create_exercise_directory_elements("back")
+legs_exercises_elements = create_exercise_directory_elements("legs")
 
 # Get User Manual Text from File
 with open("user_manual.txt", "r") as file:
@@ -520,6 +521,7 @@ with open("user_manual.txt", "r") as file:
 user_manual = pygame_gui.elements.UITextBox(
     relative_rect=pygame.Rect(base_column_width, base_row_height, base_column_width*10, base_row_height*20),
     html_text=user_manual_text,
+    object_id=pygame_gui.core.ObjectID(object_id="#user_manual"),
     manager=ui_manager,
 )
 
@@ -561,7 +563,7 @@ exercise_details_elements = [
     exercise_details_reps,
 ]
 
-# Initialise navigation icons
+# Initialise navigation elements
 user_manual_icon = ClickableIcon(
     "../Assets/file-question-mark.png",
     (base_column_width*10, base_row_height*22), 
@@ -577,12 +579,14 @@ user_manual_icon = ClickableIcon(
 user_manual_nav_label_1 = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width*10-16, base_row_height*22+13, -1, 20),
     text="User",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
 user_manual_nav_label_2 = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width*10-26, base_row_height*22+24, -1, 20),
+    relative_rect=pygame.Rect(base_column_width*10-24, base_row_height*22+25, -1, 20),
     text="Manual",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
@@ -599,14 +603,16 @@ exercise_directory_icon = ClickableIcon(
 
 # Labels to explain what the icon is for, positioned under the icons
 exercise_directory_nav_label_1 = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width*7.25-27, base_row_height*22+13, -1, 20),
+    relative_rect=pygame.Rect(base_column_width*7.25-26, base_row_height*22+13, -1, 20),
     text="Exercise",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
 exercise_directory_nav_label_2 = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width*7.25-30, base_row_height*22+24, -1, 20),
+    relative_rect=pygame.Rect(base_column_width*7.25-29, base_row_height*22+25, -1, 20),
     text="Directory",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
@@ -624,6 +630,7 @@ workout_icon = ClickableIcon(
 workout_nav_label = pygame_gui.elements.UILabel(
     relative_rect=pygame.Rect(base_column_width*4.75-28, base_row_height*22+13, -1, 20),
     text="Workout",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
@@ -631,31 +638,45 @@ workout_generation_icon = ClickableIcon(
     "../Assets/sparkles.png",
     (base_column_width*2, base_row_height*22), 
     (32, 32),
-    lambda: app_manager.change_state("Onboarding", 
-        onboarding_elements, 
+    lambda: app_manager.change_state("Workout Generation Form", 
+        workout_generation_form_elements, 
         app_manager.current_elements
     )
 )
 
 # Labels to explain what the icon is for, positioned under the icons
 workout_generation_nav_label_1 = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width*2-31, base_row_height*22+13, -1, 20),
+    relative_rect=pygame.Rect(base_column_width*2-30, base_row_height*22+13, -1, 20),
     text="Generate",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
 workout_generation_nav_label_2 = pygame_gui.elements.UILabel(
-    relative_rect=pygame.Rect(base_column_width*2-29, base_row_height*22+24, -1, 20),
+    relative_rect=pygame.Rect(base_column_width*2-28, base_row_height*22+25, -1, 20),
     text="Workout",
+    object_id=pygame_gui.core.ObjectID(class_id="@nav_label"),
     manager=ui_manager
 )
 
-navigation_elements = [user_manual_icon, workout_generation_icon, exercise_directory_icon, workout_icon]
+navigation_elements = [
+    user_manual_icon, 
+    workout_generation_icon, 
+    exercise_directory_icon, 
+    workout_icon, 
+    user_manual_nav_label_1,
+    user_manual_nav_label_2,
+    exercise_directory_nav_label_1,
+    exercise_directory_nav_label_2,
+    workout_nav_label,
+    workout_generation_nav_label_1,
+    workout_generation_nav_label_2,
+]
 
 # Hide all elements at first
 for element in [
     *loading_elements, 
-    *onboarding_elements, 
+    *workout_generation_form_elements, 
     *home_elements, 
     *exercise_directory_headings_elements, 
     *chest_exercises_elements,
